@@ -2,8 +2,9 @@
 import Icons from "@/components/Icons/Icons.vue";
 import {info, error, warn} from "@/utils/log"
 import {useRoute, useRouter} from "vue-router";
-import {computed} from "vue";
+import {computed, ref} from "vue";
 import store from "@/store";
+import {getRoutes} from "@/api";
 
 const router = useRouter();
 const route = useRoute();
@@ -34,84 +35,12 @@ let isCollapse = computed((()=>{
   return store.state.tab.isCollapse;
 }));
 
-let menuData = [
-  {
-    path: "/",
-    name: "home",
-    label: "首页",
-    icon: "HomeFilled",
-    url: ""
-  },
-  {
-    path: "/home",
-    name: "home",
-    label: "用户管理",
-    icon: "User",
-    url: "",
-    children: [
-      {
-        path: "/home",
-        name: "home",
-        label: "用户增删改",
-        icon: "MoreFilled",
-        url: "",
-        children: [
-          {
-            path: "/home",
-            name: "home",
-            label: "添加用户",
-            icon: "CirclePlusFilled",
-            url: ""
-          },
-          {
-            path: "/home",
-            name: "home",
-            label: "删除用户",
-            icon: "DeleteFilled",
-            url: ""
-          },
-          {
-            path: "/home",
-            name: "home",
-            label: "修改用户用户",
-            icon: "Tools",
-            url: ""
-          },
-          {
-            path: "/home",
-            name: "home",
-            label: "查询用户",
-            icon: "Menu",
-            url: ""
-          },
-        ]
-      },
-      {
-        path: "/home",
-        name: "home",
-        label: "用户设置",
-        icon: "MoreFilled",
-        url: "",
-        children: [
-          {
-            path: "/home",
-            name: "home",
-            label: "用户权限",
-            icon: "",
-            url: ""
-          },
-          {
-            path: "/home",
-            name: "home",
-            label: "角色",
-            icon: "",
-            url: ""
-          }
-        ]
-      }
-    ]
-  },
-]
+let menuData = ref([]);
+
+(async ()=> {
+  // 获取menu数据
+  menuData.value = (await getRoutes()).data;
+})();
 </script>
 
 <template>

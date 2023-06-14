@@ -1,6 +1,9 @@
 let tab = {
     state: {
-        isCollapse: false // 控制菜单的展开与收起
+        isCollapse: false, // 控制菜单的展开与收起
+        router: [
+
+        ]
     },
     mutations: {
         /**

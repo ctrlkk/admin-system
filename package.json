@@ -10,14 +10,16 @@
   "dependencies": {
     "@element-plus/icons-vue": "^2.1.0",
     "axios": "^1.4.0",
+    "echarts": "^5.4.2",
     "element-plus": "^2.3.6",
+    "lodash": "^4.17.21",
     "vue": "^3.3.2",
     "vue-router": "^4.2.2",
     "vuex": "^4.1.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.2.3",
-    "mock": "^0.1.1",
+    "mockjs": "^1.1.0",
     "sass": "^1.63.3",
     "unplugin-auto-import": "^0.16.4",
     "unplugin-vue-components": "^0.25.1",

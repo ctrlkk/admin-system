@@ -1,5 +1,5 @@
 import { createStore } from 'vuex'
-import tab from "@/router/tab";
+import tab from "@/store/tab";
 
 // 创建一个新的 store 实例
 const store = createStore({

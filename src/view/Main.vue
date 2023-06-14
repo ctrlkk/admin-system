@@ -1,6 +1,7 @@
 <script setup>
 import CommonAside from "@/components/CommonAside/CommonAside.vue";
 import CommonHeader from "@/components/CommonHeader/CommonHeader.vue";
+import CommonTag from "@/components/CommonTag/CommonTag.vue";
 </script>
 
 <template>
@@ -16,6 +17,7 @@ import CommonHeader from "@/components/CommonHeader/CommonHeader.vue";
           <common-header></common-header>
         </el-header>
         <el-main>
+          <common-tag></common-tag>
           <router-view></router-view>
         </el-main>
       </el-container>

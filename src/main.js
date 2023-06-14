@@ -5,6 +5,7 @@ import App from './App.vue'
 import router from "@/router";
 import store from "@/store";
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
+import "/mock"
 
 // 循环引入所有element icons
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {

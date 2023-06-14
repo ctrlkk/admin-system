@@ -1,5 +1,40 @@
 <script setup>
 
+import {onMounted, ref} from "vue";
+import {info} from "@/utils/log";
+import * as echarts from 'echarts';
+import _ from "lodash";
+
+const echartsDemo01 = ref(null);
+
+
+onMounted(() => {
+  // 初始化 echartsDemo01 的统计图
+  const echartsObj = echarts.init(echartsDemo01.value);
+  echartsObj.setOption({
+    title: {
+      text: 'ECharts 入门示例'
+    },
+    tooltip: {},
+    xAxis: {
+      data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子']
+    },
+    yAxis: {},
+    series: [
+      {
+        name: '销量',
+        type: 'bar',
+        data: [5, 20, 36, 10, 10, 20]
+      }
+    ]
+  });
+  // 窗体改变时重绘图表
+  window.onresize = _.debounce(function () {
+    echartsObj.resize();
+  }, 100);
+});
+
+
 </script>
 
 <template>
@@ -21,13 +56,18 @@
       </el-card>
     </el-col>
     <el-col :span="16">
+      <el-card class="statistics">
+        <div ref="echartsDemo01">
 
+        </div>
+      </el-card>
     </el-col>
   </el-row>
 </div>
 </template>
 
 <style scoped lang="scss">
+
 .user {
   display: flex;
   align-items: center;
@@ -55,6 +95,14 @@
       color: #666666;
       margin-left: 60px;
     }
+  }
+}
+
+.statistics {
+  margin-left: 20px;
+  height: 288px;
+  div {
+    height: 250px;
   }
 }
 </style>
