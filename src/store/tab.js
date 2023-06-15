@@ -1,9 +1,10 @@
+import {info} from "@/utils/log";
+import router from "@/router";
+
 let tab = {
     state: {
         isCollapse: false, // 控制菜单的展开与收起
-        router: [
-
-        ]
+        tags: [], // 标签页列表
     },
     mutations: {
         /**
@@ -11,12 +12,18 @@ let tab = {
          */
         collapseMenu(state) {
             state.isCollapse = !state.isCollapse;
-            storageConfig(state);
+        },
+        addTag(state, tag) {
+            state.tags.push(tag);
+        },
+        delTag(state, index) {
+            state.tags.splice(index, 1);
         }
+    },
+    actions: {
+
     }
 };
-
-tab.state = JSON.parse(localStorage.getItem("tab"));
 
 function storageConfig(state) {
     localStorage.setItem("tab", JSON.stringify(state));

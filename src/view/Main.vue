@@ -17,8 +17,17 @@ import CommonTag from "@/components/CommonTag/CommonTag.vue";
           <common-header></common-header>
         </el-header>
         <el-main>
-          <common-tag></common-tag>
-          <router-view></router-view>
+
+          <el-container>
+            <el-header style="padding: 0" height="auto">
+              <!-- 标签页 -->
+              <common-tag></common-tag>
+            </el-header>
+            <el-main style="padding: 0">
+              <router-view></router-view>
+            </el-main>
+          </el-container>
+
         </el-main>
       </el-container>
     </el-container>

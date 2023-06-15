@@ -22,7 +22,7 @@ function click() {
       <Expand v-show="isCollapse" />
     </el-icon>
     <el-breadcrumb>
-      <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+      <el-breadcrumb-item>首页</el-breadcrumb-item>
     </el-breadcrumb>
   </div>
 
@@ -47,7 +47,6 @@ function click() {
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   &>div {
     display: flex;
     align-items: center;
