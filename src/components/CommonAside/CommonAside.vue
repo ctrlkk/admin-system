@@ -1,9 +1,10 @@
 <script setup>
 import Icons from "@/components/Icons/Icons.vue";
 import {useRoute, useRouter} from "vue-router";
-import {computed, reactive, ref, watch} from "vue";
+import {computed, onMounted, reactive, ref, watch} from "vue";
 import store from "@/store";
 import {getRoutes} from "@/api";
+import { info } from "@/utils/log"
 
 const router = useRouter();
 const route = useRoute();
@@ -88,6 +89,12 @@ function getMenuDataToIndex(arr, path, index) {
   // 获取menu数据
   menuData.value = (await getRoutes()).data;
 })();
+
+onMounted(() => {
+  // 初次加载时重新跳转，使部分代码生效
+  router.push(route.path);
+  info(route.path)
+});
 </script>
 
 <template>

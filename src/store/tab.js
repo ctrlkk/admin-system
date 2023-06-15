@@ -7,9 +7,6 @@ let tab = {
         tags: [], // 标签页列表
     },
     mutations: {
-        /**
-         * 修改菜单展开与收起
-         */
         collapseMenu(state) {
             state.isCollapse = !state.isCollapse;
         },

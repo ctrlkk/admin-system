@@ -24,7 +24,12 @@ import CommonTag from "@/components/CommonTag/CommonTag.vue";
               <common-tag></common-tag>
             </el-header>
             <el-main style="padding: 0">
-              <router-view></router-view>
+              <!-- 缓存路由 -->
+              <router-view v-slot="{ Component }">
+                <keep-alive :include="[]">
+                  <component :is="Component" />
+                </keep-alive>
+              </router-view>
             </el-main>
           </el-container>
 
