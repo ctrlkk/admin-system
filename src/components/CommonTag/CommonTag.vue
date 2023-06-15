@@ -8,7 +8,8 @@ import router from "@/router";
 import store from "@/store";
 
 const route = useRoute();
-let tags = reactive([]);
+// let tags = reactive([]);
+let tags = computed(() => store.getters.getTags);
 
 let props = defineProps({
   // 指定首页路由的name
@@ -26,6 +27,7 @@ let props = defineProps({
 /**
  * 监听路由跳转的监听器
  */
+/*
 watch(useRoute(), function (to, from) {
   for (let key in tags) {
     if (to.name === tags[key].name) {
@@ -41,7 +43,7 @@ watch(useRoute(), function (to, from) {
   });
 }, {
   deep: true
-});
+});*/
 
 /**
  * tag点击事件
@@ -56,14 +58,14 @@ function tagClick(tag) {
  * @param index
  */
 function tagClose(index) {
-  if (tags[index].name === route.name) {
+  if (tags.value[index].name === route.name) {
     if (index === 0) {
       router.push(props.homePath);
     } else {
-      router.push({name: tags[index - 1].name});
+      router.push({name: tags.value[index - 1].name});
     }
   }
-  tags.splice(index, 1);
+  store.commit("delTag", index);
 }
 
 /**
@@ -71,7 +73,7 @@ function tagClose(index) {
  */
 function closeAllTag() {
   router.push(props.homePath);
-  tags.length = 0;
+  store.commit("delTagAll");
 }
 </script>
 

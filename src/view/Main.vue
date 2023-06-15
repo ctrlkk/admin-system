@@ -2,11 +2,10 @@
 import CommonAside from "@/components/CommonAside/CommonAside.vue";
 import CommonHeader from "@/components/CommonHeader/CommonHeader.vue";
 import CommonTag from "@/components/CommonTag/CommonTag.vue";
-import {reactive} from "vue";
+import {computed, reactive} from "vue";
+import store from "@/store";
 
-let include = reactive([
-    "Home"
-]);
+let include = []
 
 </script>
 

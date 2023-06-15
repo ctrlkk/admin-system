@@ -14,9 +14,18 @@ let tab = {
                 }
             }
             state.tags.push(tag);
+        },
+        delTag(state, index) {
+            state.tags.splice(index, 1);
+        },
+        delTagAll(state) {
+            state.tags.length = 0;
         }
     },
     getters: {
+        getTags(state) {
+            return state.tags;
+        }
     },
     actions: {
     }

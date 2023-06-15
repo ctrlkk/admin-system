@@ -1,7 +1,7 @@
 <script setup>
 import Icons from "@/components/Icons/Icons.vue";
 import {useRoute, useRouter} from "vue-router";
-import {computed, onMounted, reactive, ref, watch} from "vue";
+import {computed, reactive, ref, watch} from "vue";
 import store from "@/store";
 import {getRoutes} from "@/api";
 import { info } from "@/utils/log"
@@ -43,6 +43,7 @@ function clickMenu(item, index) {
     router.push(item.path);
   }
   store.commit("addTag", item);
+  info(store.state.tab.tags)
 }
 
 /**
