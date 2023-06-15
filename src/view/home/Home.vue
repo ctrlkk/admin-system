@@ -1,7 +1,6 @@
 <script setup>
 
 import {onMounted, ref} from "vue";
-import {info} from "@/utils/log";
 import * as echarts from 'echarts';
 import _ from "lodash";
 

@@ -42,6 +42,7 @@ function clickMenu(item, index) {
   if (route.path !== item.path) {
     router.push(item.path);
   }
+  store.commit("addTag", item);
 }
 
 /**
@@ -89,12 +90,6 @@ function getMenuDataToIndex(arr, path, index) {
   // 获取menu数据
   menuData.value = (await getRoutes()).data;
 })();
-
-onMounted(() => {
-  // 初次加载时重新跳转，使部分代码生效
-  router.push(route.path);
-  info(route.path)
-});
 </script>
 
 <template>

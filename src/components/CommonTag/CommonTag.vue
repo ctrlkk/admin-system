@@ -28,7 +28,7 @@ let props = defineProps({
  */
 watch(useRoute(), function (to, from) {
   for (let key in tags) {
-    if (tags[key].name === to.name) {
+    if (to.name === tags[key].name) {
       return;
     }
   }

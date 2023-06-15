@@ -1,6 +1,3 @@
-import {info} from "@/utils/log";
-import router from "@/router";
-
 let tab = {
     state: {
         isCollapse: false, // 控制菜单的展开与收起
@@ -11,19 +8,18 @@ let tab = {
             state.isCollapse = !state.isCollapse;
         },
         addTag(state, tag) {
+            for (let key in state.tags) {
+                if (tag.name === state.tags[key].name) {
+                    return;
+                }
+            }
             state.tags.push(tag);
-        },
-        delTag(state, index) {
-            state.tags.splice(index, 1);
         }
     },
+    getters: {
+    },
     actions: {
-
     }
 };
-
-function storageConfig(state) {
-    localStorage.setItem("tab", JSON.stringify(state));
-}
 
 export default tab;

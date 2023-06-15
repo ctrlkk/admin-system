@@ -2,6 +2,12 @@
 import CommonAside from "@/components/CommonAside/CommonAside.vue";
 import CommonHeader from "@/components/CommonHeader/CommonHeader.vue";
 import CommonTag from "@/components/CommonTag/CommonTag.vue";
+import {reactive} from "vue";
+
+let include = reactive([
+    "Home"
+]);
+
 </script>
 
 <template>
@@ -24,12 +30,14 @@ import CommonTag from "@/components/CommonTag/CommonTag.vue";
               <common-tag></common-tag>
             </el-header>
             <el-main style="padding: 0">
-              <!-- 缓存路由 -->
-              <router-view v-slot="{ Component }">
-                <keep-alive :include="[]">
-                  <component :is="Component" />
-                </keep-alive>
-              </router-view>
+              <el-scrollbar>
+                <!-- 缓存路由 -->
+                <router-view v-slot="{ Component }">
+                  <keep-alive :include="include">
+                    <component :is="Component" />
+                  </keep-alive>
+                </router-view>
+              </el-scrollbar>
             </el-main>
           </el-container>
 
