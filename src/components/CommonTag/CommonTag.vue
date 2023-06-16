@@ -8,8 +8,7 @@ import router from "@/router";
 import store from "@/store";
 
 const route = useRoute();
-// let tags = reactive([]);
-let tags = computed(() => store.getters.getTags);
+let tags = reactive([]);
 
 let props = defineProps({
   // 指定首页路由的name
@@ -32,7 +31,6 @@ let props = defineProps({
 /**
  * 监听路由跳转的监听器
  */
-/*
 watch(useRoute(), function (to, from) {
   for (let key in tags) {
     if (to.name === tags[key].name) {
@@ -42,13 +40,13 @@ watch(useRoute(), function (to, from) {
   if (to.path === props.homePath) {
     return;
   }
-  tags.push({
-    path: to.path,
-    name: to.name
-  });
+  let menuDate = store.getters.getMenuData;
+  menuDate = getMenuDataToData(menuDate, to.path);
+  tags.push(menuDate);
+  store.commit("addKeepAliveInclude", menuDate.name);
 }, {
   deep: true
-});*/
+});
 
 /**
  * tag点击事件
@@ -63,14 +61,17 @@ function tagClick(tag) {
  * @param index
  */
 function tagClose(index) {
-  if (tags.value[index].name === route.name) {
+  if (tags[index].name === route.name) {
     if (index === 0) {
       router.push(props.homePath);
     } else {
-      router.push({name: tags.value[index - 1].name});
+      router.push({name: tags[index - 1].name});
     }
   }
-  store.commit("delTag", index);
+  // 先删除缓存
+  store.commit("removeKeepAliveIncludeByName", tags[index].name);
+  // 删除标签数据
+  tags.splice(index, 1);
 }
 
 /**
@@ -78,13 +79,36 @@ function tagClose(index) {
  */
 function closeAllTag() {
   router.push(props.homePath);
-  store.commit("delTagAll");
-  store.commit("addKeepAliveInclude", props.homeName);
+  tags.length = 0;
 }
 
 // 首次加载时将首页加入缓存名单
 store.commit("addKeepAliveInclude", props.homeName);
 router.push(props.homePath);
+
+/**
+ * 寻找menuData中路径匹配的数据
+ * @param arr menuData
+ * @param path 路由路径
+ * @return {null} 为空则未找到
+ */
+function getMenuDataToData(arr, path) {
+  for (let i = 0; i < arr.length; i++) {
+    let value = arr[i];
+    // 找到了则返回index
+    if (value.path === path) {
+      return value;
+    }
+    // 有子选项则递归
+    if (value.children) {
+      let data = getMenuDataToData(value.children, path);
+      if (data) {
+        return data;
+      }
+    }
+  }
+  return null;
+}
 </script>
 
 <template>

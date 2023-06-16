@@ -13,8 +13,8 @@ let isCollapse = computed((()=>{
   return store.state.tab.isCollapse;
 }));
 // menu数据
-let menuData = reactive({value: []});
-// menu默认激活菜单的 index
+let menuData = computed(() => store.getters.getMenuData);
+// menu默认激活菜单的index
 let activeIndex = ref("");
 
 let props = defineProps({
@@ -42,7 +42,6 @@ function clickMenu(item, index) {
   if (route.path !== item.path) {
     router.push(item.path);
   }
-  store.commit("addTag", item);
 }
 
 /**
@@ -86,10 +85,6 @@ function getMenuDataToIndex(arr, path, index) {
   return null;
 }
 
-(async ()=> {
-  // 获取menu数据
-  menuData.value = (await getRoutes()).data;
-})();
 </script>
 
 <template>
@@ -112,7 +107,7 @@ function getMenuDataToIndex(arr, path, index) {
       </div>
 
       <!-- 循环所有子路由 -->
-      <template v-for="(item, i) in menuData.value">
+      <template v-for="(item, i) in menuData">
         <!-- 如果有子路由 -->
         <el-sub-menu v-if="item.children" :index="`${i}`">
           <template #title>
