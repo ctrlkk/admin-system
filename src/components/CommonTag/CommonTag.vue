@@ -15,12 +15,17 @@ let props = defineProps({
   // 指定首页路由的name
   homeName: {
     type: String,
-    default: "首页"
+    default: "Home"
   },
   // 指定首页路由的path
   homePath: {
     type: String,
     default: "/"
+  },
+  // 首页路由label
+  homeLabel: {
+    type: String,
+    default: "首页"
   }
 });
 
@@ -50,7 +55,7 @@ watch(useRoute(), function (to, from) {
  * @param tag
  */
 function tagClick(tag) {
-  router.push({name: tag.name});
+  router.push({path: tag.path});
 }
 
 /**
@@ -74,22 +79,32 @@ function tagClose(index) {
 function closeAllTag() {
   router.push(props.homePath);
   store.commit("delTagAll");
+  store.commit("addKeepAliveInclude", props.homeName);
 }
+
+// 首次加载时将首页加入缓存名单
+store.commit("addKeepAliveInclude", props.homeName);
+router.push(props.homePath);
 </script>
 
 <template>
   <div class="home">
     <div>
-      <el-tag @click="tagClick({name: props.homeName})" :effect="useRoute().path === '/' ? 'dark' : 'light'">首页</el-tag>
+      <el-tag
+          @click="tagClick({path: props.homePath})"
+          :effect="useRoute().path === '/' ? 'dark' : 'light'"
+      >
+        {{homeLabel}}
+      </el-tag>
       <el-tag
           v-for="(item, index) in tags"
           :key="index"
           closable
-          :effect="route.name === item.name ? 'dark' : 'light'"
+          :effect="route.path === item.path ? 'dark' : 'light'"
           @click="tagClick(item)"
           @close="tagClose(index)"
       >
-        {{item.name}}
+        {{item.label}}
       </el-tag>
     </div>
     <div>

@@ -5,7 +5,7 @@ import CommonTag from "@/components/CommonTag/CommonTag.vue";
 import {computed, reactive} from "vue";
 import store from "@/store";
 
-let include = []
+let include = computed(() => store.getters.getKeepAliveInclude);
 
 </script>
 

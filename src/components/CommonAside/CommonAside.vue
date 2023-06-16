@@ -43,7 +43,6 @@ function clickMenu(item, index) {
     router.push(item.path);
   }
   store.commit("addTag", item);
-  info(store.state.tab.tags)
 }
 
 /**

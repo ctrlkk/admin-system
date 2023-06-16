@@ -2,9 +2,11 @@ export const getRouteData = ()=> {
     return [
         {
             // 路由跳转位置
+            // 不建议多个选项指向同一个路径
             path: "/",
             // 将会用于缓存页面，请保持与页面name一致
-            name: "home",
+            // 在 3.2.34 或以上的版本中，使用 <script setup> 的单文件组件会自动根据文件名生成对应的 name 选项，无需再手动声明。
+            name: "Home",
             // 标题，标签页通过label匹配，请与router中的name保持一致
             label: "首页",
             // 图标
