@@ -13,6 +13,11 @@ let tab = {
             state.isCollapse = !state.isCollapse;
         },
         addKeepAliveInclude(state, name) {
+            for (let key in state.keepAliveInclude) {
+                if (state.keepAliveInclude[key] === name) {
+                    return;
+                }
+            }
             state.keepAliveInclude.push(name);
         },
         removeKeepAliveIncludeByName(state, name) {
