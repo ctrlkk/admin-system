@@ -1,4 +1,5 @@
 import {getRoutes} from "@/api";
+import {error} from "@/utils/log";
 
 let tab = {
     state: {
@@ -39,6 +40,10 @@ let tab = {
     }
 };
 
-tab.state.menuData = (await getRoutes()).data;
+try {
+    tab.state.menuData = (await getRoutes()).data;
+} catch (e) {
+    error(e);
+}
 
 export default tab;

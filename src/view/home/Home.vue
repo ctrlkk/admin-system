@@ -1,11 +1,9 @@
 <script setup>
-
 import {onMounted, ref} from "vue";
 import * as echarts from 'echarts';
 import _ from "lodash";
 
 const echartsDemo01 = ref(null);
-
 
 onMounted(() => {
   // 初始化 echartsDemo01 的统计图
@@ -56,9 +54,7 @@ onMounted(() => {
     </el-col>
     <el-col :span="16">
       <el-card class="statistics">
-        <div ref="echartsDemo01">
-
-        </div>
+        <div ref="echartsDemo01"></div>
       </el-card>
     </el-col>
   </el-row>

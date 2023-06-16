@@ -3,15 +3,11 @@ import Icons from "@/components/Icons/Icons.vue";
 import {useRoute, useRouter} from "vue-router";
 import {computed, reactive, ref, watch} from "vue";
 import store from "@/store";
-import {getRoutes} from "@/api";
-import { info } from "@/utils/log"
 
 const router = useRouter();
 const route = useRoute();
 // 控制页面的收放
-let isCollapse = computed((()=>{
-  return store.state.tab.isCollapse;
-}));
+let isCollapse = computed(() => store.state.tab.isCollapse);
 // menu数据
 let menuData = computed(() => store.getters.getMenuData);
 // menu默认激活菜单的index

@@ -1,15 +1,61 @@
 <script setup>
 import {Expand, Fold} from "@element-plus/icons-vue";
 import store from "@/store";
-import {computed} from "vue";
+import {computed, ref, watch} from "vue";
+import {useRoute} from "vue-router";
+import {info} from "@/utils/log";
 
+let isCollapse = computed(() => store.state.tab.isCollapse);
+let menuData = computed(() => store.getters.getMenuData);
 
-let isCollapse = computed((()=>{
-  return store.state.tab.isCollapse;
-}));
+let breadcrumbData = ref([]);
 
+/**
+ * 收放侧边栏按钮
+ */
 function click() {
   store.commit("collapseMenu");
+}
+
+/**
+ * 监听路由变化
+ */
+watch(useRoute(), function (to, from) {
+  breadcrumbData.value = getMenuDataToPaths(menuData.value, to.path, null);
+}, {
+  deep: true
+});
+
+/**
+ * 获取menuData中指定路由路径所在的路径
+ * @param arr menuData
+ * @param path 路由路径
+ * @param paths 上一次循环的路径
+ * @return {null} 为空则未找到
+ */
+function getMenuDataToPaths(arr, path, paths) {
+  for (let i = 0; i < arr.length; i++) {
+    let value = arr[i];
+    let paths2 = [];
+    // 拼接index
+    if (paths) {
+      paths2 = paths;
+    }
+    // 找到了则返回index
+    if (value.path === path) {
+      paths2.push(value);
+      return paths2;
+    }
+    // 有子选项则递归
+    if (value.children) {
+      paths2.push(value);
+      let data = getMenuDataToPaths(value.children, path, paths2);
+      if (data) {
+        return data;
+      }
+    }
+  }
+  return null;
 }
 </script>
 
@@ -22,7 +68,7 @@ function click() {
       <Expand v-show="isCollapse" />
     </el-icon>
     <el-breadcrumb>
-      <el-breadcrumb-item>首页</el-breadcrumb-item>
+      <el-breadcrumb-item v-for="(item, index) in breadcrumbData" :key="index">{{item.label}}</el-breadcrumb-item>
     </el-breadcrumb>
   </div>
 
