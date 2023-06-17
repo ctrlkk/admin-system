@@ -11,7 +11,8 @@ let isCollapse = computed(() => store.state.tab.isCollapse);
 // menu数据
 let menuData = computed(() => store.getters.getMenuData);
 // menu默认激活菜单的index
-let activeIndex = ref("");
+// let activeIndex = ref("");
+let activeIndex = computed(() => getMenuDataToIndex(menuData.value, route.path, null));
 
 let props = defineProps({
   backgroundColor: {
@@ -44,7 +45,7 @@ function clickMenu(item, index) {
  * 监听路由变化
  */
 watch(useRoute(), function (to, from) {
-  activeIndex.value = getMenuDataToIndex(menuData.value, to.path, null);
+  // activeIndex.value = getMenuDataToIndex(menuData.value, to.path, null);
 }, {
   deep: true
 });

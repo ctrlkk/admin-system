@@ -4,9 +4,15 @@ import CommonHeader from "@/components/CommonHeader/CommonHeader.vue";
 import CommonTag from "@/components/CommonTag/CommonTag.vue";
 import {computed, reactive} from "vue";
 import store from "@/store";
+import router from "@/router";
 
 let include = computed(() => store.getters.getKeepAliveInclude);
 
+
+(async () => {
+  // 初始化数据
+  await store.dispatch("init");
+})();
 </script>
 
 <template>

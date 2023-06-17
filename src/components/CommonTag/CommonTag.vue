@@ -74,6 +74,12 @@ function tagClose(index) {
   tags.splice(index, 1);
 }
 
+(async () => {
+  // 首次加载时将首页加入缓存名单
+  store.commit("addKeepAliveInclude", props.homeName);
+  await router.push(props.homePath);
+})();
+
 /**
  * 关闭全部tag
  */
@@ -81,10 +87,6 @@ function closeAllTag() {
   router.push(props.homePath);
   tags.length = 0;
 }
-
-// 首次加载时将首页加入缓存名单
-store.commit("addKeepAliveInclude", props.homeName);
-router.push(props.homePath);
 
 /**
  * 寻找menuData中路径匹配的数据

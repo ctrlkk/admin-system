@@ -8,6 +8,17 @@ let tab = {
         menuData: [], // 侧边栏数据，详见mock
     },
     actions: {
+        /**
+         * 在这里初始化数据
+         * @return {Promise<void>}
+         */
+        async init(context) {
+            try {
+                context.state.menuData = (await getRoutes()).data;
+            } catch (e) {
+                error(e);
+            }
+        }
     },
     mutations: {
         collapseMenu(state) {
@@ -39,11 +50,5 @@ let tab = {
         }
     }
 };
-
-try {
-    tab.state.menuData = (await getRoutes()).data;
-} catch (e) {
-    error(e);
-}
 
 export default tab;
