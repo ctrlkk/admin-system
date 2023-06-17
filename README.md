@@ -12,4 +12,4 @@
 具体使用方式在代码中有完善的注释
 
 ### 效果
-![]([file://./img01.png](https://github.com/Cxk-1233/admin-system/blob/main/img01.png)https://github.com/Cxk-1233/admin-system/blob/main/img01.png)
+![](https://raw.githubusercontent.com/Cxk-1233/admin-system/main/img01.png?token=GHSAT0AAAAAAB6RNVQ2XZB3LKXWH3RQ3YOIZENL5ZA)
