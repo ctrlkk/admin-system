@@ -1,7 +1,7 @@
 import Mock from "mockjs"
-import {getRouteData} from "./data/indexData";
+import {getMenuData} from "./data/indexData";
 import http from "@/utils/request";
 
-Mock.mock(`${http.getUri()}/route`, function () {
-    return getRouteData();
+Mock.mock(`${http.getUri()}/menuData`, function () {
+    return getMenuData();
 });

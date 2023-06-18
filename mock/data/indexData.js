@@ -1,4 +1,4 @@
-export const getRouteData = ()=> {
+export const getMenuData = ()=> {
     return [
         {
             // 路由跳转位置

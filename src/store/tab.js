@@ -1,4 +1,4 @@
-import {getRoutes} from "@/api";
+import {getMenuData} from "@/api";
 import {error} from "@/utils/log";
 
 let tab = {
@@ -14,7 +14,7 @@ let tab = {
          */
         async init(context) {
             try {
-                context.state.menuData = (await getRoutes()).data;
+                context.state.menuData = (await getMenuData()).data;
             } catch (e) {
                 error(e);
             }
