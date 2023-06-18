@@ -134,12 +134,15 @@ function getMenuDataToData(arr, path) {
       </el-tag>
     </div>
     <div>
-      <el-dropdown>
+      <el-dropdown trigger="click">
         <el-icon style="cursor: pointer;font-size: 20px;"><MoreFilled /></el-icon>
         <template #dropdown>
           <el-dropdown-menu>
-            <el-dropdown-item @click="closeAllTag"><el-icon><CircleClose /></el-icon>关闭所有标签页</el-dropdown-item>
-            <el-dropdown-item>关闭其他标签页</el-dropdown-item>
+            <el-dropdown-item @click="closeAllTag">
+              <el-icon><CircleClose /></el-icon>
+              {{ $t('关闭所有') }}
+            </el-dropdown-item>
+            <el-dropdown-item>{{ $t('关闭其他') }}</el-dropdown-item>
           </el-dropdown-menu>
         </template>
       </el-dropdown>

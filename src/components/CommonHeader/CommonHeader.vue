@@ -4,11 +4,14 @@ import store from "@/store";
 import {computed, ref, watch} from "vue";
 import {useRoute} from "vue-router";
 import {info} from "@/utils/log";
+import LocaleSelector from "@/components/LocaleSelector/LocaleSelector.vue";
 
 let isCollapse = computed(() => store.state.tab.isCollapse);
 let menuData = computed(() => store.getters.getMenuData);
 
-let breadcrumbData = ref([]);
+let breadcrumbData = computed(()=> {
+  return getMenuDataToPaths(menuData.value, useRoute().path, null);
+});
 
 /**
  * 收放侧边栏按钮
@@ -21,7 +24,7 @@ function click() {
  * 监听路由变化
  */
 watch(useRoute(), function (to, from) {
-  breadcrumbData.value = getMenuDataToPaths(menuData.value, to.path, null);
+  // breadcrumbData.value = getMenuDataToPaths(menuData.value, to.path, null);
 }, {
   deep: true
 });
@@ -74,13 +77,14 @@ function getMenuDataToPaths(arr, path, paths) {
 
   <!-- 头像区 -->
   <div>
+    <locale-selector />
+
     <el-dropdown trigger="click" style="margin-right: 30px">
       <el-avatar style="cursor: pointer;" src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"/>
-
       <template #dropdown>
         <el-dropdown-menu>
-          <el-dropdown-item>个人中心</el-dropdown-item>
-          <el-dropdown-item>退出账号</el-dropdown-item>
+          <el-dropdown-item>{{ $t('个人中心') }}</el-dropdown-item>
+          <el-dropdown-item>{{ $t('退出账号') }}</el-dropdown-item>
         </el-dropdown-menu>
       </template>
     </el-dropdown>

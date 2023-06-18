@@ -99,8 +99,8 @@ function getMenuDataToIndex(arr, path, index) {
       <div style="width: 200px"></div>
 
       <div class="logo" :style="`color: ${activeTextColor}`">
-        <h3 v-show="!isCollapse">通用后台管理系统</h3>
-        <h3 v-show="isCollapse">后台</h3>
+        <h3 v-show="!isCollapse">{{ $t('通用后台管理系统') }}</h3>
+        <h3 v-show="isCollapse">{{ $t('后台') }}</h3>
       </div>
 
       <!-- 循环所有子路由 -->
