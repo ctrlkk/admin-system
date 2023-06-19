@@ -1,5 +1,5 @@
 <script setup>
-import {reactive, ref} from "vue";
+import {computed, reactive, ref} from "vue";
 let isNight = ref(false);
 
 let props = defineProps({
@@ -10,11 +10,9 @@ let props = defineProps({
   }
 });
 
-// 动态计算的 长宽高等信息
-let style = reactive({
-  '--components-width': `${props.size}px`,
-  '--components-height': '70px',
-});
+let width = computed(() => props.size);
+let height = computed(() => props.size * 70 / 180);
+let starsTranslateY = computed(() => `${height * -125 / 70}px`);
 
 function click() {
   isNight.value = !isNight.value;
@@ -22,7 +20,7 @@ function click() {
 </script>
 
 <template>
-  <div :class="{ 'components': true, 'night': isNight }" :style="style">
+  <div :class="{ 'components': true, 'night': isNight }" :style='{"--width": `${width}px`, "--height": `${height}px`, "--starsTranslateY": `${starsTranslateY}`}'>
     <!-- 太阳or月亮 -->
     <div class="main-button" @click="click">
       <!-- 月亮上的陨石坑 -->
@@ -70,46 +68,63 @@ function click() {
 </template>
 
 <style lang="scss" scoped>
+.components {
+  --width: 180px;
+  --height: 70px;
+  --starsTranslateY: -125px;
+}
+
 // 黑夜模式的样式
-.night {
-  background-color: rgba(25,30,50,1) !important;
+.components.night {
+  background-color: rgba(25,30,50,1);
   .main-button {
-    transform: translateX(110px) !important;
-    background-color: rgb(195, 200, 210, 1) !important;
-    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5), inset  -3px -5px 3px -3px rgba(0, 0, 0, 0.5), inset  4px 5px 2px -2px rgba(255, 255, 210,1) !important;
+    left: calc(var(--width) * 110 / 180);
+    //transform: translateX(calc(var(--width) * 110px / 180));
+    //transform: translateX(110px);
+    background-color: rgb(195, 200, 210, 1);
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5), inset  -3px -5px 3px -3px rgba(0, 0, 0, 0.5), inset  4px 5px 2px -2px rgba(255, 255, 210,1);
   }
   // 阴影
   .daytime-background {
     &:nth-child(2) {
-      transform: translateX(110px) !important;
+      //transform: translateX(110px);
+      //left: 90px;
+      left: calc(var(--width) * 90 / 180);
     }
     &:nth-child(3) {
-      transform: translateX(80px) !important;
+      //transform: translateX(80px);
+      //left: 60px;
+      left: calc(var(--width) * 60 / 180);
     }
     &:nth-child(4) {
-      transform: translateX(50px) !important;
+      //transform: translateX(50px);
+      //left: 30px;
+      left: calc(var(--width) * 30 / 180);
     }
   }
   // 云层和阴影
   .cloud, .cloud-light {
-    transform: translateY(80px) !important;
+    bottom: calc(var(--height) * -65 / 70);
+    //bottom: -65px;
+    //transform: translateY(80px);
   }
   // 陨石坑
   .moon {
-    opacity: 1 !important;
+    opacity: 1;
   }
   // 星星
   .stars {
-    transform: translateY(-62.5px) !important;
+    top: 0;
     opacity: 1;
   }
 }
 
+// 白昼模式
 .components {
   position: fixed;
-  width: var(--components-width);
-  height: var(--components-height);
-  border-radius: 100px;
+  width: var(--width);
+  height: var(--height);
+  border-radius: var(--height);
   overflow: hidden;
   transition: 0.7s;
   background-color: rgba(70, 133, 192, 1);
@@ -121,15 +136,18 @@ function click() {
 
   // 主要按钮样式
   .main-button {
-    margin: 7.5px 0 0 7.5px;
-    width: 55px;
-    height: 55px;
-    background-color: rgba(255, 195, 35, 1);
+    position: absolute;
+    left: 0;
+    margin: calc(var(--width) * 7.5 / 180) 0 0 calc(var(--width) * 7.5 / 180);
+    //margin: 7.5px 0 0 7.5px;
+    width: calc(var(--width) * 55 / 180);
+    height: calc(var(--width) * 55 / 180);
     border-radius: 50%;
-    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5), inset -3px -5px 3px -3px rgba(0, 0, 0, 0.5), inset 4px 5px 2px -2px rgba(255, 230, 80, 1);
     cursor: pointer;
     transition: 0.7s;
     transition-timing-function: cubic-bezier(0, 0.5, 1.3, 1);
+    background-color: rgba(255, 195, 35, 1);
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5), inset -3px -5px 3px -3px rgba(0, 0, 0, 0.5), inset 4px 5px 2px -2px rgba(255, 230, 80, 1);
   }
 
   // 陨石坑
@@ -142,22 +160,22 @@ function click() {
     position: absolute;
     background-color: rgba(150, 160, 180, 1);
     &:nth-child(1) {
-      top: 7.5px;
-      left: 25px;
-      width: 12.5px;
-      height: 12.5px;
+      top: calc(var(--height) * 7.5 / 70);
+      left: calc(var(--width) * 25 / 180);
+      width: calc(var(--width) * 12.5 / 180);
+      height: calc(var(--width) * 12.5 / 180);
     }
     &:nth-child(2) {
-      top: 20px;
-      left: 7.5px;
-      width: 20px;
-      height: 20px;
+      top: calc(var(--height) * 20 / 70);
+      left: calc(var(--width) * 7.5 / 180);
+      width: calc(var(--width) * 20 / 180);
+      height: calc(var(--width) * 20 / 180);
     }
     &:nth-child(3) {
-      top: 32.5px;
-      left: 32.5px;
-      width: 12.5px;
-      height: 12.5px;
+      top: calc(var(--height) * 32.5 / 70);
+      left: calc(var(--width) * 32.5 / 180);
+      width: calc(var(--width) * 12.5 / 180);
+      height: calc(var(--width) * 12.5 / 180);
     }
   }
 
@@ -168,26 +186,38 @@ function click() {
     border-radius: 50%;
     transition-timing-function: cubic-bezier(0, 0.5, 1.3, 1);
     &:nth-child(2) {
-      top: -20px;
-      left: -20px;
-      width: 110px;
-      height: 110px;
+      top: calc(var(--height) * -20 / 70);
+      left: calc(var(--width) * -20 / 180);
+      width: calc(var(--width) * 110 / 180);
+      height: calc(var(--width) * 110 / 180);
+      //top: -20px;
+      //left: -20px;
+      //width: 110px;
+      //height: 110px;
       background-color: rgba(255, 255, 255, 0.2);
       z-index: -2;
     }
     &:nth-child(3) {
-      top: -35px;
-      left: -15px;
-      width: 135px;
-      height: 135px;
+      top: calc(var(--height) * -35 / 70);
+      left: calc(var(--width) * -15 / 180);
+      width: calc(var(--width) * 135 / 180);
+      height: calc(var(--width) * 135 / 180);
+      //top: -35px;
+      //left: -15px;
+      //width: 135px;
+      //height: 135px;
       background-color: rgba(255, 255, 255, 0.1);
       z-index: -3;
     }
     &:nth-child(4) {
-      top: -45px;
-      left: -15px;
-      width: 160px;
-      height: 160px;
+      top: calc(var(--height) * -45 / 70);
+      left: calc(var(--width) * -15 / 180);
+      width: calc(var(--width) * 160 / 180);
+      height: calc(var(--width) * 160 / 180);
+      //top: -45px;
+      //left: -15px;
+      //width: 160px;
+      //height: 160px;
       background-color: rgba(255, 255, 255, 0.05);
       z-index: -4;
     }
@@ -201,6 +231,9 @@ function click() {
   // 设置实体云层级
   .cloud {
     z-index: -2;
+    position: absolute;
+    bottom: 0;
+    right: 0;
   }
 
   // 云层虚影在云层下方,并且整体上移,逆时针旋转5度
@@ -208,7 +241,8 @@ function click() {
     position: absolute;
     z-index: -3;
     right: 0;
-    bottom: 25px;
+    bottom: calc(var(--height) * 25 / 70);
+    //bottom: 25px;
     opacity: 0.5;
     transform: rotate(-5deg);
   }
@@ -220,63 +254,94 @@ function click() {
     background-color: #fff;
     position: absolute;
     &:nth-child(1), &:nth-child(7) {
-      right: -20px;
-      bottom: 10px;
-      width: 50px;
-      height: 50px;
+      right: calc(var(--height) * -20 / 70);
+      bottom: calc(var(--width) * 10 / 180);
+      width: calc(var(--width) * 50 / 180);
+      height: calc(var(--width) * 50 / 180);
+      //right: -20px;
+      //bottom: 10px;
+      //width: 50px;
+      //height: 50px;
     }
     &:nth-child(2), &:nth-child(8) {
-      right: -10px;
-      bottom: -25px;
-      width: 60px;
-      height: 60px;
+      right: calc(var(--height) * -10 / 70);
+      bottom: calc(var(--width) * -25 / 180);
+      width: calc(var(--width) * 60 / 180);
+      height: calc(var(--width) * 60 / 180);
+      //right: -10px;
+      //bottom: -25px;
+      //width: 60px;
+      //height: 60px;
     }
     &:nth-child(3), &:nth-child(9) {
-      right: 20px;
-      bottom: -40px;
-      width: 60px;
-      height: 60px;
+      right: calc(var(--height) * 20 / 70);
+      bottom: calc(var(--width) * -40 / 180);
+      width: calc(var(--width) * 60 / 180);
+      height: calc(var(--width) * 60 / 180);
+      //right: 20px;
+      //bottom: -40px;
+      //width: 60px;
+      //height: 60px;
     }
     &:nth-child(4), &:nth-child(10) {
-      right: 50px;
-      bottom: -35px;
-      width: 60px;
-      height: 60px;
+      right: calc(var(--height) * 50 / 70);
+      bottom: calc(var(--width) * -35 / 180);
+      width: calc(var(--width) * 60 / 180);
+      height: calc(var(--width) * 60 / 180);
+      //right: 50px;
+      //bottom: -35px;
+      //width: 60px;
+      //height: 60px;
     }
     &:nth-child(5), &:nth-child(11) {
-      right: 75px;
-      bottom: -60px;
-      width: 75px;
-      height: 75px;
+      right: calc(var(--height) * 75 / 70);
+      bottom: calc(var(--width) * -60 / 180);
+      width: calc(var(--width) * 75 / 180);
+      height: calc(var(--width) * 75 / 180);
+      //right: 75px;
+      //bottom: -60px;
+      //width: 75px;
+      //height: 75px;
     }
     &:nth-child(6), &:nth-child(12) {
-      right: 110px;
-      bottom: -50px;
-      width: 60px;
-      height: 60px;
+      right: calc(var(--height) * 110 / 70);
+      bottom: calc(var(--width) * -50 / 180);
+      width: calc(var(--width) * 60 / 180);
+      height: calc(var(--width) * 60 / 180);
+      //right: 110px;
+      //bottom: -50px;
+      //width: 60px;
+      //height: 60px;
     }
   }
 
   // 所有星星样式
   .stars {
-    transform: translateY(-125px);
+    top: calc(var(--height) * -65 / 70);
     z-index: -2;
     transition: 0.7s;
     transition-timing-function: cubic-bezier(0, 0.5, 1.3, 1);
+    position: absolute;
     // 大星星
     .big {
-      width: 15px;
-      height: 15px;
+      width: calc(var(--width) * 15 / 180);
+      height: calc(var(--width) * 15 / 180);
+      //width: 15px;
+      //height: 15px;
     }
     // 中星星
     .medium {
-      width: 10px;
-      height: 10px;
+      width: calc(var(--width) * 10 / 180);
+      height: calc(var(--width) * 10 / 180);
+      //width: 10px;
+      //height: 10px;
     }
     // 小星星
     .small {
-      width: 6px;
-      height: 6px;
+      width: calc(var(--width) * 6 / 180);
+      height: calc(var(--width) * 6 / 180);
+      //width: 6px;
+      //height: 6px;
     }
 
     .star {
@@ -286,48 +351,70 @@ function click() {
 
       // 设置星星位置
       &:nth-child(1) {
-        top: 10px;
-        left: 40px;
+        top: calc(var(--height) * 10 / 70);
+        left: calc(var(--width) * 40 / 180);
+        //top: 10px;
+        //left: 40px;
       }
       &:nth-child(2) {
-        top: 20px;
-        left: 95px;
+        top: calc(var(--height) * 20 / 70);
+        left: calc(var(--width) * 95 / 180);
+        //top: 20px;
+        //left: 95px;
       }
       &:nth-child(3) {
-        top: 20px;
-        left: 20px;
+        top: calc(var(--height) * 20 / 70);
+        left: calc(var(--width) * 20 / 180);
+        //top: 20px;
+        //left: 20px;
       }
       &:nth-child(4) {
-        top: 35px;
-        left: 50px;
+        top: calc(var(--height) * 35 / 70);
+        left: calc(var(--width) * 50 / 180);
+        //top: 35px;
+        //left: 50px;
       }
       &:nth-child(5) {
-        top: 50px;
-        left: 80px;
+        top: calc(var(--height) * 50 / 70);
+        left: calc(var(--width) * 80 / 180);
+        //top: 50px;
+        //left: 80px;
       }
       &:nth-child(6) {
-        top: 50px;
-        left: 20px;
+        top: calc(var(--height) * 50 / 70);
+        left: calc(var(--width) * 20 / 180);
+        //top: 50px;
+        //left: 20px;
       }
       &:nth-child(7) {
-        top: 40px;
-        left: 27.5px;
+        top: calc(var(--height) * 40 / 70);
+        left: calc(var(--width) * 27.5 / 180);
+        //top: 40px;
+        //left: 27.5px;
       }
       &:nth-child(8) {
-        top: 55px;
-        left: 45px;
+        top: calc(var(--height) * 55 / 70);
+        left: calc(var(--width) * 45 / 180);
+        //top: 55px;
+        //left: 45px;
       }
       &:nth-child(9) {
-        top: 20px;
-        left: 75px;
+        top: calc(var(--height) * 20 / 70);
+        left: calc(var(--width) * 75 / 180);
+        //top: 20px;
+        //left: 75px;
       }
       &:nth-child(10) {
-        top: 32.5px;
-        left: 67.5px;
+        top: calc(var(--height) * 32.5 / 70);
+        left: calc(var(--width) * 67.5 / 180);
+        //top: 32.5px;
+        //left: 67.5px;
       }
       &:nth-child(11) {
-        top: 40px;
-        left: 95px;
+        top: calc(var(--height) * 40 / 70);
+        left: calc(var(--width) * 95 / 180);
+        //top: 40px;
+        //left: 95px;
       }
     }
   }
