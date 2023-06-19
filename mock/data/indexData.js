@@ -29,5 +29,16 @@ export const getMenuData = ()=> {
                 }
             ]
         },
+        {
+            label: "组件测试",
+            icon: "User",
+            children: [
+                {
+                    label: "button",
+                    path: "/button",
+                    name: "button"
+                }
+            ]
+        }
     ]
 }

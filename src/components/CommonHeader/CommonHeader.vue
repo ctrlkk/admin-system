@@ -5,6 +5,7 @@ import {computed, ref, watch} from "vue";
 import {useRoute} from "vue-router";
 import {info} from "@/utils/log";
 import LocaleSelector from "@/components/LocaleSelector/LocaleSelector.vue";
+import DayNightToggleButton from "@/components/Button/DayNightToggleButton.vue";
 
 let isCollapse = computed(() => store.state.tab.isCollapse);
 let menuData = computed(() => store.getters.getMenuData);

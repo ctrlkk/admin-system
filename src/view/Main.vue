@@ -19,7 +19,7 @@ let include = computed(() => store.getters.getKeepAliveInclude);
   <div class="home">
     <el-container>
       <el-aside width="auto">
-        <!-- 菜单栏 -->
+        <!-- 侧边菜单栏 -->
         <common-aside></common-aside>
       </el-aside>
       <el-container>
