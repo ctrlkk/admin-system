@@ -4,17 +4,16 @@ import store from "@/store";
 import {computed, ref, watch} from "vue";
 import {useRoute} from "vue-router";
 import { useDark, useToggle } from '@vueuse/core'
-import {info} from "@/utils/log";
 import LocaleSelector from "@/components/LocaleSelector/LocaleSelector.vue";
-import DayNightToggleButton from "@/components/Button/DayNightToggleButton.vue";
+import DayNightSwitch from "@/components/Button/DayNightSwitch.vue";
 
 let isCollapse = computed(() => store.state.tab.isCollapse);
 let menuData = computed(() => store.getters.getMenuData);
-let isDark = useDark(); // 是否暗色模式
-
 let breadcrumbData = computed(()=> {
   return getMenuDataToPaths(menuData.value, useRoute().path, null);
 });
+const isDark = useDark(); // 是否暗色模式
+// const isDark = ref(false);
 
 /**
  * 收放侧边栏按钮
@@ -81,7 +80,8 @@ function getMenuDataToPaths(arr, path, paths) {
 
   <!-- 头像区 -->
   <div>
-    <day-night-toggle-button :size="50" v-model="isDark" style="margin-right: 20px"></day-night-toggle-button>
+<!--    <el-switch v-model="isDark" style="margin-right: 20px"></el-switch>-->
+    <day-night-switch :size="50" v-model="isDark" style="margin-right: 20px"></day-night-switch>
     <locale-selector style="margin-right: 20px" />
 
     <el-dropdown trigger="click" style="margin-right: 30px">

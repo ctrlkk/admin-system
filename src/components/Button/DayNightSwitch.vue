@@ -25,7 +25,10 @@ function click() {
 </script>
 
 <template>
-  <div :class="{ 'components': true, 'night': modelValue }" :style='{"--width": `${width}px`, "--height": `${height}px`, "--starsTranslateY": `${starsTranslateY}`}'>
+  <div
+      :class="{ 'components': true, 'night': modelValue }"
+      :style='{ "--width": `${width}px`, "--height": `${height}px` }'
+  >
     <!-- 太阳or月亮 -->
     <div class="main-button" @click="click">
       <!-- 月亮上的陨石坑 -->
@@ -76,7 +79,6 @@ function click() {
 .components {
   --width: 180px;
   --height: 70px;
-  --starsTranslateY: -125px;
 }
 
 // 黑夜模式的样式

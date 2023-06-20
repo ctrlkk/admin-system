@@ -59,7 +59,7 @@ let isDark = useDark();
   padding: 0;
   margin: 0;
   .el-main {
-    transition: 0.7s;
+    transition: 0.5s;
     background-color: #F0F2F5;
     width: 100%;
     height: 100%;

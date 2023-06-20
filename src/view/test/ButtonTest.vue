@@ -1,7 +1,7 @@
 <script setup>
-import DayNightToggleButton from "@/components/Button/DayNightToggleButton.vue";
 import { ref } from "vue";
 import {useDark} from "@vueuse/core";
+import DayNightSwitch from "@/components/Button/DayNightSwitch.vue";
 
 let value1 = ref(180);
 let isDark = useDark();
@@ -10,7 +10,7 @@ let isDark = useDark();
 
 <template>
   <div class="home">
-    <day-night-toggle-button :size="value1" v-model="isDark"></day-night-toggle-button>
+    <day-night-switch :size="value1" v-model="isDark"></day-night-switch>
     <el-slider v-model="value1" :min="100" :max="300" />
   </div>
 </template>
