@@ -1,6 +1,5 @@
 <script setup>
 import {computed, reactive, ref} from "vue";
-// let modelValue = ref(false);
 
 let props = defineProps({
   // 按钮大小 单位px
@@ -21,7 +20,6 @@ let height = computed(() => props.size * 70 / 180);
 let starsTranslateY = computed(() => `${height * -125 / 70}px`);
 
 function click() {
-  // modelValue.value = !modelValue.value;
   emits('update:modelValue', !props.modelValue);
 }
 </script>

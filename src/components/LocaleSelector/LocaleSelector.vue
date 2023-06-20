@@ -9,7 +9,7 @@ let languages = [
 
 <template>
   <div class="home">
-    <el-dropdown trigger="click" style="margin-right: 30px">
+    <el-dropdown trigger="click">
       <n-icon size="20" style="cursor: pointer">
         <LanguageFilled/>
       </n-icon>

@@ -2,12 +2,12 @@
 import CommonAside from "@/components/CommonAside/CommonAside.vue";
 import CommonHeader from "@/components/CommonHeader/CommonHeader.vue";
 import CommonTag from "@/components/CommonTag/CommonTag.vue";
-import {computed, reactive} from "vue";
+import {computed} from "vue";
 import store from "@/store";
-import router from "@/router";
+import {useDark} from "@vueuse/core";
 
 let include = computed(() => store.getters.getKeepAliveInclude);
-
+let isDark = useDark();
 
 (async () => {
   // 初始化数据
@@ -16,7 +16,7 @@ let include = computed(() => store.getters.getKeepAliveInclude);
 </script>
 
 <template>
-  <div class="home">
+  <div :class="{'home': true, 'dark': isDark}">
     <el-container>
       <el-aside width="auto">
         <!-- 侧边菜单栏 -->
@@ -30,7 +30,7 @@ let include = computed(() => store.getters.getKeepAliveInclude);
         <el-main>
 
           <el-container>
-            <el-header style="padding: 0" height="auto">
+            <el-header style="padding: 0;" height="auto">
               <!-- 标签页 -->
               <common-tag></common-tag>
             </el-header>
@@ -59,9 +59,17 @@ let include = computed(() => store.getters.getKeepAliveInclude);
   padding: 0;
   margin: 0;
   .el-main {
+    transition: 0.7s;
     background-color: #F0F2F5;
     width: 100%;
     height: 100%;
+  }
+}
+
+// 暗色模式下的样式
+.home.dark {
+  .el-main {
+    background-color: #121212;
   }
 }
 </style>
