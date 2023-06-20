@@ -1,26 +1,33 @@
 <script setup>
 import {computed, reactive, ref} from "vue";
-let isNight = ref(false);
+// let modelValue = ref(false);
 
 let props = defineProps({
   // 按钮大小 单位px
   size: {
     type: Number,
     default: 180
+  },
+  modelValue: {
+    type: Boolean,
+    default: false
   }
 });
+
+let emits = defineEmits(['update:modelValue']);
 
 let width = computed(() => props.size);
 let height = computed(() => props.size * 70 / 180);
 let starsTranslateY = computed(() => `${height * -125 / 70}px`);
 
 function click() {
-  isNight.value = !isNight.value;
+  // modelValue.value = !modelValue.value;
+  emits('update:modelValue', !props.modelValue);
 }
 </script>
 
 <template>
-  <div :class="{ 'components': true, 'night': isNight }" :style='{"--width": `${width}px`, "--height": `${height}px`, "--starsTranslateY": `${starsTranslateY}`}'>
+  <div :class="{ 'components': true, 'night': modelValue }" :style='{"--width": `${width}px`, "--height": `${height}px`, "--starsTranslateY": `${starsTranslateY}`}'>
     <!-- 太阳or月亮 -->
     <div class="main-button" @click="click">
       <!-- 月亮上的陨石坑 -->
