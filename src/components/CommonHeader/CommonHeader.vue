@@ -7,10 +7,16 @@ import { useDark, useToggle } from '@vueuse/core'
 import LocaleSelector from "@/components/LocaleSelector/LocaleSelector.vue";
 import DayNightSwitch from "@/components/Button/DayNightSwitch.vue";
 
+let props = defineProps({
+  // menu数据
+  data: {
+    type: Array
+  }
+});
+
 let isCollapse = computed(() => store.state.tab.isCollapse);
-let menuData = computed(() => store.getters.getMenuData);
 let breadcrumbData = computed(()=> {
-  return getMenuDataToPaths(menuData.value, useRoute().path, null);
+  return getMenuDataToPaths(props.data, useRoute().path, null);
 });
 const isDark = useDark(); // 是否暗色模式
 // const isDark = ref(false);
@@ -26,14 +32,14 @@ function click() {
  * 监听路由变化
  */
 watch(useRoute(), function (to, from) {
-  // breadcrumbData.value = getMenuDataToPaths(menuData.value, to.path, null);
+  // breadcrumbData.value = getMenuDataToPaths(data.value, to.path, null);
 }, {
   deep: true
 });
 
 /**
  * 获取menuData中指定路由路径所在的路径
- * @param arr menuData
+ * @param arr data
  * @param path 路由路径
  * @param paths 上一次循环的路径
  * @return {null} 为空则未找到

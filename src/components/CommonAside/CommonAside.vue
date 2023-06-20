@@ -1,18 +1,11 @@
 <script setup>
 import Icons from "@/components/Icons/Icons.vue";
 import {useRoute, useRouter} from "vue-router";
-import {computed, reactive, ref, watch} from "vue";
+import {computed, watch} from "vue";
 import store from "@/store";
 
 const router = useRouter();
 const route = useRoute();
-// 控制页面的收放
-let isCollapse = computed(() => store.state.tab.isCollapse);
-// menu数据
-let menuData = computed(() => store.getters.getMenuData);
-// menu默认激活菜单的index
-// let activeIndex = ref("");
-let activeIndex = computed(() => getMenuDataToIndex(menuData.value, route.path, null));
 
 let props = defineProps({
   backgroundColor: {
@@ -26,8 +19,17 @@ let props = defineProps({
   activeTextColor: {
     type: String,
     default: "#FFFFFF"
+  },
+  // menu数据
+  data: {
+    type: Array
   }
 });
+
+// 控制页面的收放
+let isCollapse = computed(() => store.state.tab.isCollapse);
+// menu默认激活菜单的index
+let activeIndex = computed(() => getMenuDataToIndex(props.data, route.path, null));
 
 /**
  * menu点击事件
@@ -45,14 +47,14 @@ function clickMenu(item, index) {
  * 监听路由变化
  */
 watch(useRoute(), function (to, from) {
-  // activeIndex.value = getMenuDataToIndex(menuData.value, to.path, null);
+  // activeIndex.value = getMenuDataToIndex(data.value, to.path, null);
 }, {
   deep: true
 });
 
 /**
  * 获取menuData中指定路由路径所在的index
- * @param arr menuData
+ * @param arr data
  * @param path 路由路径
  * @param index 上一次循环的index
  * @return {null} 为空则未找到
@@ -104,7 +106,7 @@ function getMenuDataToIndex(arr, path, index) {
       </div>
 
       <!-- 循环所有子路由 -->
-      <template v-for="(item, i) in menuData">
+      <template v-for="(item, i) in data">
         <!-- 如果有子路由 -->
         <el-sub-menu v-if="item.children" :index="`${i}`">
           <template #title>

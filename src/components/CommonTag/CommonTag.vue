@@ -1,14 +1,11 @@
 <script setup>
 import {CircleClose, MoreFilled} from "@element-plus/icons-vue";
-import _ from "lodash";
-import {info} from "@/utils/log";
 import {useRoute} from "vue-router";
-import {computed, reactive, ref, watch} from "vue";
+import {reactive, watch} from "vue";
 import router from "@/router";
 import store from "@/store";
 
 const route = useRoute();
-let tags = reactive([]);
 
 let props = defineProps({
   // 指定首页路由的name
@@ -25,8 +22,19 @@ let props = defineProps({
   homeLabel: {
     type: String,
     default: "首页"
+  },
+  // menu数据
+  data: {
+    type: Array
+  },
+  // 路由缓存名单
+  modelValue: {
+    type: Array
   }
 });
+
+let emits = defineEmits(['update:modelValue']);
+let tags = reactive([]);
 
 /**
  * 监听路由跳转的监听器
@@ -40,7 +48,7 @@ watch(useRoute(), function (to, from) {
   if (to.path === props.homePath) {
     return;
   }
-  let menuDate = store.getters.getMenuData;
+  let menuDate = props.data;
   menuDate = getMenuDataToData(menuDate, to.path);
   tags.push(menuDate);
   store.commit("addKeepAliveInclude", menuDate.name);
@@ -90,7 +98,7 @@ function closeAllTag() {
 
 /**
  * 寻找menuData中路径匹配的数据
- * @param arr menuData
+ * @param arr data
  * @param path 路由路径
  * @return {null} 为空则未找到
  */

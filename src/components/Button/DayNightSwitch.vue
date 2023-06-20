@@ -17,7 +17,6 @@ let emits = defineEmits(['update:modelValue']);
 
 let width = computed(() => props.size);
 let height = computed(() => props.size * 70 / 180);
-let starsTranslateY = computed(() => `${height * -125 / 70}px`);
 
 function click() {
   emits('update:modelValue', !props.modelValue);

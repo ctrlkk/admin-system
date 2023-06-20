@@ -2,12 +2,14 @@
 import CommonAside from "@/components/CommonAside/CommonAside.vue";
 import CommonHeader from "@/components/CommonHeader/CommonHeader.vue";
 import CommonTag from "@/components/CommonTag/CommonTag.vue";
-import {computed} from "vue";
+import {computed, reactive} from "vue";
 import store from "@/store";
 import {useDark} from "@vueuse/core";
 
-let include = computed(() => store.getters.getKeepAliveInclude);
+// let include = computed(() => store.getters.getKeepAliveInclude);
+let include = reactive([]);
 let isDark = useDark();
+let menuData = computed(() => store.getters.getMenuData);
 
 (async () => {
   // 初始化数据
@@ -20,19 +22,19 @@ let isDark = useDark();
     <el-container>
       <el-aside width="auto">
         <!-- 侧边菜单栏 -->
-        <common-aside></common-aside>
+        <common-aside :data="menuData"></common-aside>
       </el-aside>
       <el-container>
         <el-header>
           <!-- 顶部菜单 -->
-          <common-header></common-header>
+          <common-header :data="menuData"></common-header>
         </el-header>
         <el-main>
-
+          <!---------------主内容区---------------->
           <el-container>
             <el-header style="padding: 0;" height="auto">
               <!-- 标签页 -->
-              <common-tag></common-tag>
+              <common-tag :data="menuData" v-model="include"></common-tag>
             </el-header>
             <el-main style="padding: 0;width: 100%;height: 100%">
               <el-scrollbar>
@@ -45,7 +47,7 @@ let isDark = useDark();
               </el-scrollbar>
             </el-main>
           </el-container>
-
+          <!------------------------------->
         </el-main>
       </el-container>
     </el-container>
