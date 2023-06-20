@@ -8,7 +8,7 @@ export default {
 </script>
 
 <template>
-<div>
+<div class="home">
   403
   <input/>
 </div>

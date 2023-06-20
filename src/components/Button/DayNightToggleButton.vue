@@ -121,7 +121,7 @@ function click() {
 
 // 白昼模式
 .components {
-  position: fixed;
+  position: sticky;
   width: var(--width);
   height: var(--height);
   border-radius: var(--height);

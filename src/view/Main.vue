@@ -34,7 +34,7 @@ let include = computed(() => store.getters.getKeepAliveInclude);
               <!-- 标签页 -->
               <common-tag></common-tag>
             </el-header>
-            <el-main style="padding: 0">
+            <el-main style="padding: 0;width: 100%;height: 100%">
               <el-scrollbar>
                 <!-- 缓存路由 -->
                 <router-view v-slot="{ Component }">
@@ -60,6 +60,8 @@ let include = computed(() => store.getters.getKeepAliveInclude);
   margin: 0;
   .el-main {
     background-color: #F0F2F5;
+    width: 100%;
+    height: 100%;
   }
 }
 </style>
