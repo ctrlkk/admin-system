@@ -10,7 +10,8 @@ import DayNightSwitch from "@/components/Button/DayNightSwitch.vue";
 let props = defineProps({
   // menu数据
   data: {
-    type: Array
+    type: Array,
+    default: []
   }
 });
 

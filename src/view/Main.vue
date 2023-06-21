@@ -2,18 +2,16 @@
 import CommonAside from "@/components/CommonAside/CommonAside.vue";
 import CommonHeader from "@/components/CommonHeader/CommonHeader.vue";
 import CommonTag from "@/components/CommonTag/CommonTag.vue";
-import {computed, reactive} from "vue";
-import store from "@/store";
+import {reactive, ref} from "vue";
 import {useDark} from "@vueuse/core";
+import {getMenuData} from "@/api";
 
-// let include = computed(() => store.getters.getKeepAliveInclude);
-let include = reactive([]);
-let isDark = useDark();
-let menuData = computed(() => store.getters.getMenuData);
+let include = reactive([]); // 路由缓存名单
+let isDark = useDark(); // 控制暗黑模式
+let menuData = ref([]);
 
 (async () => {
-  // 初始化数据
-  await store.dispatch("init");
+  menuData.value = (await getMenuData()).data;
 })();
 </script>
 

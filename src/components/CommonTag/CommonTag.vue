@@ -43,7 +43,7 @@ watch(keepAliveInclude, function () {
 /**
  * 监听路由跳转的监听器
  */
-watch(useRoute(), function (to, from) {
+watch(useRoute(), function (to) {
   for (let key in tags) {
     if (to.name === tags[key].name) {
       return;
@@ -88,17 +88,16 @@ function tagClose(index) {
 (async () => {
   // 首次加载时将首页加入缓存名单
   keepAliveInclude.add(props.homeName);
-  // keepAliveInclude.push(props.homeName);
   await router.push(props.homePath);
 })();
 
 /**
  * 关闭全部tag
  */
-function closeAllTag() {
-  router.push(props.homePath);
+async function closeAllTag() {
+  await router.push(props.homePath);
   tags.length = 0;
-  keepAliveInclude.clear()
+  keepAliveInclude.clear();
   keepAliveInclude.add(props.homeName);
 }
 
