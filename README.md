@@ -23,4 +23,4 @@ https://cxk-1233.github.io/admin-system/
 | v-model | 绑定值             | Boolean | false |
 | size    | 控制按钮的大小，对应width | Number  | 180   |
 
-由于项目中使用了VueUse中的useDark来控制昼夜切换，获取因为VueUse的BUG导致动画无法正常播放，如果使用 ref/reactive 变量是正常的
+由于项目中使用了VueUse中的useDark来控制昼夜切换，或许因为VueUse的BUG导致动画无法正常播放，如果使用 ref/reactive 则是正常的
