@@ -1,12 +1,12 @@
-import './assets/main.css'
+import './main.css'
 import 'element-plus/theme-chalk/dark/css-vars.css'
+import "/mock"
 
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from "@/router";
 import store from "@/store";
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
-import "/mock"
 import {logo} from "@/assets/logo";
 import {createI18n} from "vue-i18n";
 // 导入每种语言的翻译消息对象

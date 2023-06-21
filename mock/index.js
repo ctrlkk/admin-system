@@ -1,7 +1,7 @@
 import Mock from "mockjs"
-import {getMenuData} from "./data/indexData";
-import http from "@/utils/request";
+import "./api/menu"
+import "./api/router"
 
-Mock.mock(`${http.getUri()}/menuData`, function () {
-    return getMenuData();
+Mock.setup({
+    timeout: "200-1000"
 });

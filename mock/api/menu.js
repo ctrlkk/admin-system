@@ -1,4 +1,11 @@
-export const getMenuData = ()=> {
+import Mock from "mockjs"
+import http from "@/utils/request";
+
+Mock.mock(`${http.getUri()}/menu`, "get", function () {
+    return getMenuData();
+});
+
+function getMenuData() {
     return [
         {
             // 路由跳转位置
