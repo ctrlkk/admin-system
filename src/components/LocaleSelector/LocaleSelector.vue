@@ -1,10 +1,13 @@
 <script setup>
 import { LanguageFilled } from "@vicons/material"
-let languages = [
+import {useI18n} from "vue-i18n";
+import {reactive} from "vue";
+let languages = reactive([
   { label: 'English', value: 'en' },
   { label: '中文', value: 'zh' }
-]
+]);
 
+const i18n = useI18n();
 </script>
 
 <template>
@@ -18,8 +21,8 @@ let languages = [
           <el-dropdown-item
               v-for="(item, index) in languages"
               :key="index"
-              :disabled="this.$i18n.locale === item.value"
-              @click="this.$i18n.locale = item.value"
+              :disabled="i18n.locale.value === item.value"
+              @click="i18n.locale.value = item.value"
           >
             {{ item.label }}
           </el-dropdown-item>
