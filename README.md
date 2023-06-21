@@ -13,3 +13,14 @@
 
 ### 效果
 https://cxk-1233.github.io/admin-system/
+
+### 关于昼夜切换开关（DayNightSwitch）
+![img_1.png](https://github.com/Cxk-1233/admin-system/blob/master/img_1.png?raw=true)
+![img_2.png](https://github.com/Cxk-1233/admin-system/blob/master/img_2.png?raw=true)
+
+| 参数      | 说明              | 类型      | 默认值   |
+|---------|-----------------|---------|-------|
+| v-model | 绑定值             | Boolean | false |
+| size    | 控制按钮的大小，对应width | Number  | 180   |
+
+由于项目中使用了VueUse中的useDark来控制昼夜切换，获取因为VueUse的BUG导致动画无法正常播放，如果使用 ref/reactive 变量是正常的
