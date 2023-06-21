@@ -3,7 +3,6 @@ import {CircleClose, MoreFilled} from "@element-plus/icons-vue";
 import {useRoute} from "vue-router";
 import {reactive, watch} from "vue";
 import router from "@/router";
-import store from "@/store";
 
 const route = useRoute();
 
@@ -34,7 +33,12 @@ let props = defineProps({
 });
 
 let emits = defineEmits(['update:modelValue']);
-let tags = reactive([]);
+const tags = reactive([]);
+
+const keepAliveInclude = reactive(new Set()); // 保持活动的页面 (缓存名单)
+watch(keepAliveInclude, function () {
+  emits('update:modelValue', [...keepAliveInclude]);
+});
 
 /**
  * 监听路由跳转的监听器
@@ -48,10 +52,9 @@ watch(useRoute(), function (to, from) {
   if (to.path === props.homePath) {
     return;
   }
-  let menuDate = props.data;
-  menuDate = getMenuDataToData(menuDate, to.path);
+  let menuDate = getMenuDataToData(props.data, to.path);
   tags.push(menuDate);
-  store.commit("addKeepAliveInclude", menuDate.name);
+  keepAliveInclude.add(menuDate.name);
 }, {
   deep: true
 });
@@ -77,14 +80,15 @@ function tagClose(index) {
     }
   }
   // 先删除缓存
-  store.commit("removeKeepAliveIncludeByName", tags[index].name);
+  keepAliveInclude.delete(tags[index].name);
   // 删除标签数据
   tags.splice(index, 1);
 }
 
 (async () => {
   // 首次加载时将首页加入缓存名单
-  store.commit("addKeepAliveInclude", props.homeName);
+  keepAliveInclude.add(props.homeName);
+  // keepAliveInclude.push(props.homeName);
   await router.push(props.homePath);
 })();
 
@@ -94,6 +98,8 @@ function tagClose(index) {
 function closeAllTag() {
   router.push(props.homePath);
   tags.length = 0;
+  keepAliveInclude.clear()
+  keepAliveInclude.add(props.homeName);
 }
 
 /**
