@@ -78,6 +78,7 @@ let menuData = ref([]);
   }
 }
 
+// 路由切换动画
 .slide-fade-enter-active {
   transition: all 0.3s ease-out;
 }
