@@ -1,0 +1,1 @@
+import{_ as e,o as t,c as o,a as s,b as a}from"./index-e6a4235b.js";const c={name:"403"},n={class:"home"},r=a("input",null,null,-1);function _(d,l,p,i,u,f){return t(),o("div",n,[s(" 403 "),r])}const h=e(c,[["render",_]]);export{h as default};
