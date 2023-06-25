@@ -36,11 +36,16 @@ let menuData = ref([]);
             </el-header>
             <el-main style="padding: 0;width: 100%;height: 100%">
               <el-scrollbar>
-                <!-- 缓存路由 -->
                 <router-view v-slot="{ Component }">
-                  <keep-alive :include="include">
-                    <component :is="Component" />
-                  </keep-alive>
+
+                  <!-- 路由切换动画 -->
+                  <transition :duration="{ enter: 500, leave: 300 }" mode="out-in" name="slide-fade">
+                    <!-- 缓存路由 -->
+                    <keep-alive :include="include">
+                      <component :is="Component"/>
+                    </keep-alive>
+                  </transition>
+
                 </router-view>
               </el-scrollbar>
             </el-main>
@@ -71,5 +76,22 @@ let menuData = ref([]);
   .el-main {
     background-color: #121212;
   }
+}
+
+.slide-fade-enter-active {
+  transition: all 0.3s ease-out;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.5s;
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  opacity: 0.3;
+}
+
+.slide-fade-enter-to, .slide-fade-leave-from {
+  opacity: 1;
 }
 </style>

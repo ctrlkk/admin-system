@@ -1,4 +1,4 @@
-import { createRouter,createWebHashHistory } from 'vue-router'
+import {createRouter, createWebHashHistory} from 'vue-router'
 import Home from "@/view/home/Home.vue";
 import Main from "@/view/Main.vue";
 
@@ -15,7 +15,8 @@ const routes = [
             {path: "/500", name: "500", component: () => import("@/view/error/500.vue")},
             {path: "/button", name: "button", component: () => import("@/view/test/ButtonTest.vue")}
         ]
-    }
+    },
+    {path: "/login", name: "login", component: () => import("@/view/login/Login.vue")}
 ];
 
 const router = createRouter({
