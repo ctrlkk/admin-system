@@ -1,4 +1,5 @@
 import axios from "axios";
+import store from "@/store";
 
 const baseURL = "http://127.0.0.1:3000/api"
 
@@ -12,6 +13,9 @@ export default http;
  * 请求拦截器
  */
 http.interceptors.request.use(function (config) {
+    // 在请求时带上令牌
+    config.headers.token = store.state.loginInfo.token;
+
 
     return config;
 }, function (error) {

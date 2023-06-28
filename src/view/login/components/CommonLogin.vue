@@ -1,9 +1,27 @@
 <script setup>
+import {ref} from "vue";
+import store from "@/store";
+import router from "@/router";
 
+let loading = ref(false);
+let user = {
+  name: "",
+  password: ""
+}
+
+async function login() {
+  loading.value = true;
+  setTimeout(() => {
+    loading.value = false;
+    store.state.loginInfo.time = new Date().getTime();
+    store.state.loginInfo.token = "123";
+    router.push('/');
+  }, 1000);
+}
 </script>
 
 <template>
-  <div>
+  <div v-loading="loading">
     <el-card class="login-card">
       <template #header>
         <div class="card-header">
@@ -16,16 +34,26 @@
           class="demo-ruleForm"
           label-width="100px"
           status-icon>
-        <el-form-item label="账号" prop="username">
+
+        <el-form-item
+            v-model="user.name"
+            label="账号"
+            prop="username">
           <el-input autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="密码" prop="passwd">
+
+        <el-form-item
+            v-model="user.password"
+            label="密码"
+            prop="passwd">
           <el-input autocomplete="off" type="password"></el-input>
         </el-form-item>
+
         <el-form-item>
-          <el-button type="primary">登入</el-button>
+          <el-button type="primary" @click="login">登入</el-button>
           <el-button>重置</el-button>
         </el-form-item>
+
       </el-form>
 
     </el-card>
@@ -36,6 +64,7 @@
 .login-card {
   width: 500px;
   margin: auto;
+  background-color: rgba(255, 255, 255, 0.5);
 
   .el-form {
     width: 100%;
