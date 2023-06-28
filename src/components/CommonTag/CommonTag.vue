@@ -88,7 +88,6 @@ function tagClose(index) {
 (async () => {
   // 首次加载时将首页加入缓存名单
   keepAliveInclude.add(props.homeName);
-  await router.push(props.homePath);
 })();
 
 /**
