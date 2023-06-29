@@ -1,4 +1,4 @@
-import {createStore} from 'vuex'
+/*import {createStore} from 'vuex'
 import tab from "@/store/tab";
 
 // 创建一个新的 store 实例
@@ -20,3 +20,8 @@ const store = createStore({
 })
 
 export default store;
+*/
+
+import {createPinia} from "pinia";
+
+export const store = createPinia();

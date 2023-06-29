@@ -1,7 +1,10 @@
 import {createRouter, createWebHashHistory} from 'vue-router'
 import Home from "@/view/home/Home.vue";
 import Main from "@/view/Main.vue";
-import store from "@/store";
+import {user} from "@/store/user";
+import {store} from "@/store";
+
+let {loginInfo} = user(store);
 
 // 将 路由 与组件进行映射
 const routes = [
@@ -21,7 +24,7 @@ const routes = [
             // 登入状态判断
             // 最大在线时间 毫秒
             let maxOnlineTime = 60 * 60 * 1000;
-            if (!store.state.loginInfo.token || !store.state.loginInfo.time || store.state.loginInfo.time + maxOnlineTime < new Date().getTime()) {
+            if (!loginInfo.token || !loginInfo.time || loginInfo.time + maxOnlineTime < new Date().getTime()) {
                 // 登入状态异常或登入状态过期
                 next("login");
                 return;

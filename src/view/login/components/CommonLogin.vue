@@ -1,20 +1,22 @@
 <script setup>
 import {ref} from "vue";
-import store from "@/store";
 import router from "@/router";
 
+import {user} from '@/store/user'
+
+let {loginInfo} = user();
+
 let loading = ref(false);
-let user = {
-  name: "",
-  password: ""
-}
+
+let name = "";
+let password = "";
 
 async function login() {
   loading.value = true;
   setTimeout(() => {
     loading.value = false;
-    store.state.loginInfo.time = new Date().getTime();
-    store.state.loginInfo.token = "123";
+    loginInfo.time = new Date().getTime();
+    loginInfo.token = "123";
     router.push('/');
   }, 1000);
 }
@@ -36,14 +38,14 @@ async function login() {
           status-icon>
 
         <el-form-item
-            v-model="user.name"
+            v-model="name"
             label="账号"
             prop="username">
           <el-input autocomplete="off"></el-input>
         </el-form-item>
 
         <el-form-item
-            v-model="user.password"
+            v-model="password"
             label="密码"
             prop="passwd">
           <el-input autocomplete="off" type="password"></el-input>

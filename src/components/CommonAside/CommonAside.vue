@@ -1,8 +1,9 @@
 <script setup>
 import Icons from "@/components/Icons/Icons.vue";
 import {useRoute, useRouter} from "vue-router";
-import {computed, watch} from "vue";
-import store from "@/store";
+import {computed} from "vue";
+import {storeToRefs} from "pinia";
+import {tab} from "@/store/tab";
 
 const router = useRouter();
 const route = useRoute();
@@ -27,7 +28,7 @@ let props = defineProps({
 });
 
 // 控制页面的收放
-let isCollapse = computed(() => store.state.tab.isCollapse);
+let {isCollapse} = storeToRefs(tab());
 // menu默认激活菜单的index
 let activeIndex = computed(() => getMenuDataToIndex(props.data, route.path, null));
 
@@ -42,15 +43,6 @@ function clickMenu(item, index) {
     router.push(item.path);
   }
 }
-
-/**
- * 监听路由变化
- */
-watch(useRoute(), function (to, from) {
-  // activeIndex.value = getMenuDataToIndex(data.value, to.path, null);
-}, {
-  deep: true
-});
 
 /**
  * 获取menuData中指定路由路径所在的index

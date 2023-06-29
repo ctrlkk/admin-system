@@ -1,11 +1,12 @@
 <script setup>
 import {Expand, Fold} from "@element-plus/icons-vue";
-import store from "@/store";
-import {computed, ref, watch} from "vue";
+import {computed} from "vue";
 import {useRoute} from "vue-router";
-import { useDark, useToggle } from '@vueuse/core'
+import {useDark} from '@vueuse/core'
 import LocaleSelector from "@/components/LocaleSelector/LocaleSelector.vue";
 import DayNightSwitch from "@/components/Button/DayNightSwitch.vue";
+import {storeToRefs} from "pinia";
+import {tab} from "@/store/tab";
 
 let props = defineProps({
   // menu数据
@@ -15,28 +16,20 @@ let props = defineProps({
   }
 });
 
-let isCollapse = computed(() => store.state.tab.isCollapse);
-let breadcrumbData = computed(()=> {
+// 菜单栏缩放控制
+let {isCollapse} = storeToRefs(tab());
+
+let breadcrumbData = computed(() => {
   return getMenuDataToPaths(props.data, useRoute().path, null);
 });
 const isDark = useDark(); // 是否暗色模式
-// const isDark = ref(false);
 
 /**
  * 收放侧边栏按钮
  */
 function click() {
-  store.commit("collapseMenu");
+  isCollapse = !isCollapse;
 }
-
-/**
- * 监听路由变化
- */
-watch(useRoute(), function (to, from) {
-  // breadcrumbData.value = getMenuDataToPaths(data.value, to.path, null);
-}, {
-  deep: true
-});
 
 /**
  * 获取menuData中指定路由路径所在的路径
