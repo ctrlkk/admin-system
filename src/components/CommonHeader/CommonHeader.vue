@@ -28,7 +28,7 @@ const isDark = useDark(); // 是否暗色模式
  * 收放侧边栏按钮
  */
 function click() {
-  isCollapse = !isCollapse;
+  isCollapse.value = !isCollapse.value;
 }
 
 /**

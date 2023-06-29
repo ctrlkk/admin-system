@@ -25,8 +25,5 @@ export const tab = defineStore('tab', {
         }
     },
     actions: {
-        collapseMenu() {
-            this.isCollapse = !this.isCollapse;
-        }
     }
 })
