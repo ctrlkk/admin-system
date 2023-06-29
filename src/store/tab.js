@@ -7,6 +7,18 @@ export const tab = defineStore('tab', {
             menuData: [], // 路由名单
         }
     },
-    actions: {
+    actions: {},
+    persist: {
+        // 配置缓存
+        enabled: true,
+        strategies: [
+            {
+                key: "tab",
+                storage: localStorage,
+                paths: [
+                    'isCollapse'
+                ]
+            },
+        ]
     }
 })

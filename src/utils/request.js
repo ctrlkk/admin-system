@@ -1,6 +1,6 @@
 import axios from "axios";
 import {user} from "@/store/user";
-import {store} from "@/store";
+import store from "@/store";
 
 
 let {loginInfo} = user(store);

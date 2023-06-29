@@ -1,3 +1,8 @@
 import {createPinia} from "pinia";
+import piniaPluginPersist from "pinia-plugin-persist"
 
-export const store = createPinia();
+const store = createPinia();
+// 数据持久化
+store.use(piniaPluginPersist);
+
+export default store;

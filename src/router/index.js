@@ -2,7 +2,7 @@ import {createRouter, createWebHashHistory} from 'vue-router'
 import Home from "@/view/home/Home.vue";
 import Main from "@/view/Main.vue";
 import {user} from "@/store/user";
-import {store} from "@/store";
+import store from "@/store";
 
 let {loginInfo} = user(store);
 
