@@ -2,17 +2,15 @@
 import CommonAside from "@/components/CommonAside/CommonAside.vue";
 import CommonHeader from "@/components/CommonHeader/CommonHeader.vue";
 import CommonTag from "@/components/CommonTag/CommonTag.vue";
-import {reactive, ref} from "vue";
+import {reactive} from "vue";
 import {useDark} from "@vueuse/core";
-import {getMenuData} from "@/api/menu";
+import {storeToRefs} from "pinia";
+import {tab} from "@/store/tab";
 
 let include = reactive([]); // 路由缓存名单
 let isDark = useDark(); // 控制暗黑模式
-let menuData = ref([]);
+let {menuData} = storeToRefs(tab());
 
-(async () => {
-  menuData.value = (await getMenuData()).data;
-})();
 </script>
 
 <template>

@@ -3,8 +3,12 @@ import {ref} from "vue";
 import router from "@/router";
 
 import {user} from '@/store/user'
+import {getMenuData} from "@/api/menu";
+import {tab} from "@/store/tab";
+import {storeToRefs} from "pinia";
 
 let {loginInfo} = user();
+let {menuData} = storeToRefs(tab());
 
 let loading = ref(false);
 
@@ -13,11 +17,14 @@ let password = "";
 
 async function login() {
   loading.value = true;
-  setTimeout(() => {
+  setTimeout(async () => {
     loading.value = false;
+
+    menuData.value = (await getMenuData()).data;
     loginInfo.time = new Date().getTime();
     loginInfo.token = "123";
-    router.push('/');
+    await router.push('/');
+
   }, 1000);
 }
 </script>
