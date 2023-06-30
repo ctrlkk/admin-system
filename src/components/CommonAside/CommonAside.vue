@@ -27,6 +27,12 @@ let props = defineProps({
   }
 });
 
+/**
+ * clickMenu 菜单点击事件
+ * @type {EmitFn<string[]>}
+ */
+let emits = defineEmits(['clickMenu']);
+
 // 控制页面的收放
 let {isCollapse} = storeToRefs(tab());
 // menu默认激活菜单的index
@@ -36,9 +42,10 @@ let activeIndex = computed(() => getMenuDataToIndex(props.data, route.path, null
  * menu点击事件
  * 页面切换
  * @param item menu数据
- * @param index
+ * @param index menu下标
  */
 function clickMenu(item, index) {
+  emits('clickMenu', item, index);
   if (route.path !== item.path) {
     router.push(item.path);
   }

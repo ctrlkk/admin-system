@@ -2,15 +2,27 @@
 import CommonAside from "@/components/CommonAside/CommonAside.vue";
 import CommonHeader from "@/components/CommonHeader/CommonHeader.vue";
 import CommonTag from "@/components/CommonTag/CommonTag.vue";
-import {reactive} from "vue";
+import {reactive, ref} from "vue";
 import {useDark} from "@vueuse/core";
 import {storeToRefs} from "pinia";
 import {tab} from "@/store/tab";
 
 let include = reactive([]); // 路由缓存名单
 let isDark = useDark(); // 控制暗黑模式
+let loading = ref(false); // 是否正在加载路由
 let {menuData} = storeToRefs(tab());
 
+function clickMenu() {
+  loading.value = true;
+}
+
+/**
+ * 在元素被插入到 DOM 之前被调用
+ * @param el
+ */
+function onBeforeEnter(el) {
+  loading.value = false;
+}
 </script>
 
 <template>
@@ -18,7 +30,7 @@ let {menuData} = storeToRefs(tab());
     <el-container>
       <el-aside width="auto">
         <!-- 侧边菜单栏 -->
-        <common-aside :data="menuData"></common-aside>
+        <common-aside :data="menuData" @click-menu="clickMenu"></common-aside>
       </el-aside>
       <el-container>
         <el-header>
@@ -32,12 +44,13 @@ let {menuData} = storeToRefs(tab());
               <!-- 标签页 -->
               <common-tag :data="menuData" v-model="include"></common-tag>
             </el-header>
-            <el-main style="padding: 0;width: 100%;height: 100%">
+            <el-main v-loading="loading" style="padding: 0;width: 100%;height: 100%">
               <el-scrollbar>
 
                 <router-view v-slot="{ Component }">
                   <!-- 设置路由切换动画 -->
                   <transition
+                      @before-enter="onBeforeEnter"
                       mode="out-in"
                       name="slide">
                     <!-- 设置缓存路由 -->
