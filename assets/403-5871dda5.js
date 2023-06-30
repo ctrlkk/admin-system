@@ -1,1 +1,0 @@
-import{_ as e,o as t,c as o,a,b as n}from"./index-fae296b8.js";const s={name:"403"},c=n("input",null,null,-1);function r(_,l,p,d,u,i){return t(),o("div",null,[a(" 403 "),c])}const m=e(s,[["render",r]]);export{m as default};
