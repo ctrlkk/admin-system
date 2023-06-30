@@ -34,17 +34,19 @@ let {menuData} = storeToRefs(tab());
             </el-header>
             <el-main style="padding: 0;width: 100%;height: 100%">
               <el-scrollbar>
-                <router-view v-slot="{ Component }">
 
-                  <!-- 路由切换动画 -->
-                  <transition :duration="{ enter: 500, leave: 300 }" mode="out-in" name="slide-fade">
-                    <!-- 缓存路由 -->
+                <router-view v-slot="{ Component }">
+                  <!-- 设置路由切换动画 -->
+                  <transition
+                      mode="out-in"
+                      name="slide">
+                    <!-- 设置缓存路由 -->
                     <keep-alive :include="include">
-                      <component :is="Component"/>
+                      <component :is="Component" style="height: 100%;width: 100%"/>
                     </keep-alive>
                   </transition>
-
                 </router-view>
+
               </el-scrollbar>
             </el-main>
           </el-container>
@@ -76,21 +78,31 @@ let {menuData} = storeToRefs(tab());
   }
 }
 
-// 路由切换动画
-.slide-fade-enter-active {
-  transition: all 0.3s ease-out;
+/* 路由切换动画 滑动 */
+.slide-leave-to {
+  /* 定义从右往左出去 */
+  //transform: translateX(-100%);
+  transform: translateX(20px);
+  opacity: 0;
 }
 
-.slide-fade-leave-active {
-  transition: all 0.5s;
+.slide-enter-from {
+  /* 定义从左往右进来 */
+  //transform: translateX(100%);
+  transform: translateX(20px);
+  opacity: 0;
 }
 
-.slide-fade-enter-from,
-.slide-fade-leave-to {
-  opacity: 0.3;
+.slide-enter-to,
+.slide-leave-from {
+  /* 定义进入结束和离开开始的位置为中间 */
+  transform: translateX(0);
 }
 
-.slide-fade-enter-to, .slide-fade-leave-from {
-  opacity: 1;
+.slide-enter-active,
+.slide-leave-active {
+  /* 定义过渡的时间和方式 */
+  transition: all 0.3s ease;
 }
+
 </style>

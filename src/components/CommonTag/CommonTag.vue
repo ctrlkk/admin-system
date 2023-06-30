@@ -37,7 +37,6 @@ const tags = reactive([]);
 
 const keepAliveInclude = reactive(new Set()); // 保持活动的页面 (缓存名单)
 watch(keepAliveInclude, function () {
-  console.log([...keepAliveInclude])
   emits('update:modelValue', [...keepAliveInclude]);
 });
 

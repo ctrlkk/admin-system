@@ -18,12 +18,12 @@ let password = "";
 async function login() {
   loading.value = true;
   setTimeout(async () => {
-    loading.value = false;
 
     menuData.value = (await getMenuData()).data;
     loginInfo.time = new Date().getTime();
     loginInfo.token = "123";
     await router.push('/');
+    loading.value = false;
 
   }, 1000);
 }

@@ -41,9 +41,9 @@ function getMenuData() {
             icon: "User",
             children: [
                 {
-                    label: "button",
-                    path: "/button",
-                    name: "button"
+                    label: "buttonTest",
+                    path: "/buttonTest",
+                    name: "buttonTest"
                 }
             ]
         }
