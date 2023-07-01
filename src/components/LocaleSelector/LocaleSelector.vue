@@ -1,7 +1,8 @@
 <script setup>
-import { LanguageFilled } from "@vicons/material"
+import {LanguageFilled} from "@vicons/material"
 import {useI18n} from "vue-i18n";
 import {reactive} from "vue";
+
 let languages = reactive([
   { label: 'English', value: 'en' },
   { label: '中文', value: 'zh' }
@@ -13,9 +14,9 @@ const i18n = useI18n();
 <template>
   <div class="home">
     <el-dropdown trigger="click">
-      <n-icon size="20" style="cursor: pointer">
+      <el-icon size="20" style="cursor: pointer">
         <LanguageFilled/>
-      </n-icon>
+      </el-icon>
       <template #dropdown>
         <el-dropdown-menu>
           <el-dropdown-item

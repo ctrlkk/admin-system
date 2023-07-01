@@ -32,7 +32,6 @@
     "@vicons/utils": "^0.1.4",
     "@vitejs/plugin-vue": "^4.2.3",
     "mockjs": "^1.1.0",
-    "naive-ui": "^2.34.4",
     "sass": "^1.63.6",
     "unplugin-auto-import": "^0.16.4",
     "unplugin-vue-components": "^0.25.1",
