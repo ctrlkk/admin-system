@@ -18,16 +18,13 @@ function getMenuData() {
             label: "首页",
             // 图标
             icon: "HomeFilled",
-            url: ""
         },
         {
             label: "页面",
             icon: "User",
-            url: "",
             children: [
                 {
                     label: "错误页面",
-                    url: "",
                     children: [
                         {path: "/403", name: "403", label: "403", icon: ""},
                         {path: "/404", name: "404", label: "404", icon: ""},
