@@ -1,15 +1,5 @@
 <script setup>
-import {
-  CirclePlusFilled,
-  DeleteFilled,
-  HomeFilled,
-  MoreFilled,
-  Tools,
-  User,
-  Menu,
-  Fold,
-  Expand
-} from "@element-plus/icons-vue";
+import {CirclePlusFilled, DeleteFilled, HomeFilled, Menu, MoreFilled, Tools, User} from "@element-plus/icons-vue";
 
 let props = defineProps({
   /**

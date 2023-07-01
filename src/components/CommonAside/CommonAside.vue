@@ -1,5 +1,5 @@
 <script setup>
-import Icons from "@/components/Icons/Icons.vue";
+import Icons from "@/components/CommonAside/Icons.vue";
 import {useRoute, useRouter} from "vue-router";
 import {computed} from "vue";
 import {storeToRefs} from "pinia";
