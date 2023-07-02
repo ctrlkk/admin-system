@@ -1,5 +1,5 @@
 <script setup>
-import Icons from "@/components/CommonAside/Icons.vue";
+import AMenu from "./Menu.vue"
 import {useRoute, useRouter} from "vue-router";
 import {computed} from "vue";
 import {storeToRefs} from "pinia";
@@ -104,56 +104,7 @@ function getMenuDataToIndex(arr, path, index) {
         <h3 v-show="isCollapse">{{ $t('后台') }}</h3>
       </div>
 
-      <!-- 循环所有子路由 -->
-      <template v-for="(item, i) in data">
-        <!-- 如果有子路由 -->
-        <el-sub-menu v-if="item.children" :index="`${i}`">
-          <template #title>
-            <icons :icon-name="item.icon"></icons>
-            <span>{{item.label}}</span>
-          </template>
-
-          <!-- 有子路由继续循环 -->
-          <template v-for="(item2, j) in item.children">
-            <!-- 分组 -->
-            <el-menu-item-group v-if="item2.group">
-              <template #title><span>{{item2.label}}</span></template>
-              <el-menu-item v-for="(item3, k) in item2.children" :index="`${i}-${j}-${k}`" @click="clickMenu(item3, `${i}-${j}-${k}`)">
-                <icons :icon-name="item3.icon"></icons>
-                <span>{{item3.label}}</span>
-              </el-menu-item>
-            </el-menu-item-group>
-
-            <!-- 不分组 -->
-            <template v-else>
-              <!-- 没有三级路由 -->
-              <el-menu-item v-if="!item2.children" :index="`${i}-${j}`" @click="clickMenu(item2, `${i}-${j}`)">
-                <icons :icon-name="item2.icon"></icons>
-                <span>{{item2.label}}</span>
-              </el-menu-item>
-
-              <!-- 有三级路由 -->
-              <el-sub-menu v-else :index="`${i}-${j}`">
-                <template #title>
-                  <icons :icon-name="item2.icon"></icons>
-                  <span>{{item2.label}}</span>
-                </template>
-                <el-menu-item v-for="(item3, k) in item2.children" :index="`${i}-${j}-${k}`" @click="clickMenu(item3, `${i}-${j}-${k}`)">
-                  <icons :icon-name="item3.icon"></icons>
-                  <span>{{item3.label}}</span>
-                </el-menu-item>
-              </el-sub-menu>
-            </template>
-
-          </template>
-        </el-sub-menu>
-
-        <!-- 如果没有子路由 -->
-        <el-menu-item v-else :index="`${i}`" @click="clickMenu(item)">
-          <icons :icon-name="item.icon"></icons>
-          <template #title>{{item.label}}</template>
-        </el-menu-item>
-      </template>
+      <a-menu :data="data" @click-menu="clickMenu"></a-menu>
 
     </el-menu>
   </el-scrollbar>
