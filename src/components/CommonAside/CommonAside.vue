@@ -45,8 +45,8 @@ let activeIndex = computed(() => getMenuDataToIndex(props.data, route.path, null
  * @param index menu下标
  */
 function clickMenu(item, index) {
-  emits('clickMenu', item, index);
   if (route.path !== item.path) {
+    emits('clickMenu', item, index);
     router.push(item.path);
   }
 }
