@@ -1,6 +1,6 @@
 # admin-system
 基于vue3的后台管理系统模板  
-技术栈：`element-plus` `vue3` `router` `vuex` `axios` `mock` `lodash`
+技术栈：`element-plus` `vue3` `router` `pinia` `axios` `mock` `lodash`
 
 # 使用步骤
 使用方式很简单  
