@@ -45,7 +45,7 @@ watch(keepAliveInclude, function () {
  */
 watch(useRoute(), function (to) {
   for (let key in tags) {
-    if (to.name === tags[key].name) {
+    if (to.name === tags[key].name || to.path === tags[key].path) {
       return;
     }
   }
