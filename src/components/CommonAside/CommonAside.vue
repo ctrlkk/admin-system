@@ -4,6 +4,7 @@ import {useRoute, useRouter} from "vue-router";
 import {computed} from "vue";
 import {storeToRefs} from "pinia";
 import {tab} from "@/store/tab";
+import {useWindowSize} from "@vueuse/core";
 
 const router = useRouter();
 const route = useRoute();
@@ -83,12 +84,27 @@ function getMenuDataToIndex(arr, path, index) {
   return null;
 }
 
+// 窗体大小
+const {width, height} = useWindowSize();
+
+/**
+ * 判断是否使用手机布局
+ */
+let isMobile = computed(() => {
+  if (width.value > 500) {
+    return false;
+  }
+  if (width.value < 500) {
+    return true;
+  }
+});
 </script>
 
 <template>
   <el-scrollbar :style="`background-color: ${backgroundColor}`">
     <!-- 菜单页 -->
     <el-menu
+        :class="{'mobile': isMobile, 'show': !isCollapse}"
         :background-color="backgroundColor"
         :active-text-color="activeTextColor"
         :text-color="textColor"
@@ -105,8 +121,9 @@ function getMenuDataToIndex(arr, path, index) {
       </div>
 
       <a-menu :data="data" @click-menu="clickMenu"></a-menu>
-
     </el-menu>
+
+    <div :class="{'mask-layer': true, 'show': !isCollapse, 'mobile': isMobile}" @click="isCollapse = true"></div>
   </el-scrollbar>
 </template>
 
@@ -122,5 +139,28 @@ function getMenuDataToIndex(arr, path, index) {
   }
   height: 100%;
   border-right: none;
+}
+
+.el-menu.mobile {
+  position: fixed;
+  z-index: 2002;
+  display: none;
+}
+
+.el-menu.mobile.show {
+  display: inline;
+}
+
+.mask-layer.mobile {
+  transition: 0.5s;
+  z-index: 2001;
+  position: fixed;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 0;
+}
+
+.mask-layer.mobile.show {
+  width: 100%;
 }
 </style>

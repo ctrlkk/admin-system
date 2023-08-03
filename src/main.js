@@ -6,7 +6,6 @@ import "/mock"
 import {createApp} from 'vue'
 import App from './App.vue'
 import router from "@/router";
-import {logo} from "@/assets/logo";
 import i18n from "../i18n";
 import store from "@/store";
 
@@ -15,5 +14,3 @@ createApp(App)
     .use(store)
     .use(router)
     .mount('#app');
-
-console.group(logo)

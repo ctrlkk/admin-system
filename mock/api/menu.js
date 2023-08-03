@@ -34,15 +34,136 @@ function getMenuData() {
             ]
         },
         {
-            label: "组件测试",
-            icon: "User",
+            label: "标签页测试",
+            icon: "MessageBox",
             children: [
-                {
-                    label: "buttonTest",
-                    path: "/buttonTest",
-                    name: "buttonTest"
-                }
+                {path: "/tabs-test/tabsTest1", name: "TabsTest1", label: "TabsTest1", icon: "FullScreen"},
+                {path: "/tabs-test/tabsTest2", name: "TabsTest2", label: "TabsTest2", icon: "FullScreen"},
+                {path: "/tabs-test/tabsTest3", name: "TabsTest3", label: "TabsTest3", icon: "FullScreen"},
+                {path: "/tabs-test/tabsTest4", name: "TabsTest4", label: "TabsTest4", icon: "FullScreen"},
+                {path: "/tabs-test/tabsTest5", name: "TabsTest5", label: "TabsTest5", icon: "FullScreen"},
             ]
+        },
+        {
+            label: "组件测试",
+            icon: "FullScreen",
+            children: [
+                {label: "昼夜switch", path: "/buttonTest", name: "buttonTest", icon: "Open"},
+                {label: "标签页组件", path: "/TabsTest", name: "TabsTest", icon: "More"}
+            ]
+        },
+        {
+            "path": "",
+            "children": [
+                {
+                    "path": "",
+                    "children": [
+                        {
+                            "path": "",
+                            "children": [
+                                {
+                                    "path": "",
+                                    "children": [
+                                        {
+                                            "path": "",
+                                            "children": [
+                                                {
+                                                    "path": "",
+                                                    "children": [
+                                                        {
+                                                            "path": "",
+                                                            "children": [
+                                                                {
+                                                                    "path": "",
+                                                                    "children": [
+                                                                        {
+                                                                            "path": "",
+                                                                            "children": [
+                                                                                {
+                                                                                    "path": "",
+                                                                                    "children": [
+                                                                                        {
+                                                                                            "path": "",
+                                                                                            "children": [
+                                                                                                {
+                                                                                                    "path": "/test/test1",
+                                                                                                    "name": "Test1",
+                                                                                                    "icon": "Link",
+                                                                                                    "id": 33,
+                                                                                                    "label": "测试页1"
+                                                                                                },
+                                                                                                {
+                                                                                                    "path": "/test/test2",
+                                                                                                    "name": "Test2",
+                                                                                                    "icon": "Link",
+                                                                                                    "id": 34,
+                                                                                                    "label": "测试页2"
+                                                                                                }
+                                                                                            ],
+                                                                                            "name": "",
+                                                                                            "icon": "",
+                                                                                            "id": 24,
+                                                                                            "label": "10级"
+                                                                                        }
+                                                                                    ],
+                                                                                    "name": "",
+                                                                                    "icon": "",
+                                                                                    "id": 23,
+                                                                                    "label": "9级"
+                                                                                }
+                                                                            ],
+                                                                            "name": "",
+                                                                            "icon": "",
+                                                                            "id": 22,
+                                                                            "label": "8级"
+                                                                        }
+                                                                    ],
+                                                                    "name": "",
+                                                                    "icon": "",
+                                                                    "id": 21,
+                                                                    "label": "7级"
+                                                                }
+                                                            ],
+                                                            "name": "",
+                                                            "icon": "",
+                                                            "id": 20,
+                                                            "label": "6级"
+                                                        }
+                                                    ],
+                                                    "name": "",
+                                                    "icon": "",
+                                                    "id": 19,
+                                                    "label": "5级"
+                                                }
+                                            ],
+                                            "name": "",
+                                            "icon": "",
+                                            "id": 18,
+                                            "label": "4级"
+                                        }
+                                    ],
+                                    "name": "",
+                                    "icon": "",
+                                    "id": 17,
+                                    "label": "3级"
+                                }
+                            ],
+                            "name": "",
+                            "icon": "",
+                            "id": 16,
+                            "label": "2级"
+                        }
+                    ],
+                    "name": "",
+                    "icon": "",
+                    "id": 15,
+                    "label": "1级"
+                }
+            ],
+            "name": "",
+            "icon": "Menu",
+            "id": 14,
+            "label": "无限分级"
         }
     ]
 }

@@ -66,35 +66,35 @@ function getMenuDataToPaths(arr, path, paths) {
 </script>
 
 <template>
-<div class="home">
-  <!-- 按钮以及面包屑 -->
-  <div>
-    <el-icon @click="click" size="20" style="cursor: pointer;">
-      <Fold v-show="!isCollapse" />
-      <Expand v-show="isCollapse" />
-    </el-icon>
-    <el-breadcrumb>
-      <el-breadcrumb-item v-for="(item, index) in breadcrumbData" :key="index">{{item.label}}</el-breadcrumb-item>
-    </el-breadcrumb>
-  </div>
+  <div class="home">
+    <!-- 按钮以及面包屑 -->
+    <div>
+      <el-icon :size="15" style="cursor: pointer;" @click="click">
+        <Fold v-show="!isCollapse"/>
+        <Expand v-show="isCollapse"/>
+      </el-icon>
+      <el-breadcrumb>
+        <el-breadcrumb-item v-for="(item, index) in breadcrumbData" :key="index">{{ item.label }}</el-breadcrumb-item>
+      </el-breadcrumb>
+    </div>
 
-  <!-- 头像区 -->
-  <div>
-<!--    <el-switch v-model="isDark" style="margin-right: 20px"></el-switch>-->
-    <day-night-switch :size="50" v-model="isDark" style="margin-right: 20px"></day-night-switch>
-    <locale-selector style="margin-right: 20px" />
+    <!-- 头像区 -->
+    <div>
+      <day-night-switch v-model="isDark" :size="40" style="margin-right: 20px"></day-night-switch>
+      <locale-selector style="margin-right: 20px"/>
 
-    <el-dropdown trigger="click" style="margin-right: 30px">
-      <el-avatar style="cursor: pointer;" src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"/>
-      <template #dropdown>
-        <el-dropdown-menu>
-          <el-dropdown-item>{{ $t('个人中心') }}</el-dropdown-item>
-          <el-dropdown-item>{{ $t('退出账号') }}</el-dropdown-item>
-        </el-dropdown-menu>
-      </template>
-    </el-dropdown>
+      <el-dropdown style="margin-right: 10px" trigger="click">
+        <el-avatar :size="26" src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+                   style="cursor: pointer;"/>
+        <template #dropdown>
+          <el-dropdown-menu>
+            <el-dropdown-item>{{ $t('个人中心') }}</el-dropdown-item>
+            <el-dropdown-item>{{ $t('退出账号') }}</el-dropdown-item>
+          </el-dropdown-menu>
+        </template>
+      </el-dropdown>
+    </div>
   </div>
-</div>
 </template>
 
 <style scoped lang="scss">

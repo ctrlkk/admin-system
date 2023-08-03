@@ -18,7 +18,35 @@ const routes = [
             {path: "/403", name: "403", component: () => import("@/view/error/403.vue")},
             {path: "/404", name: "404", component: () => import("@/view/error/404.vue")},
             {path: "/500", name: "500", component: () => import("@/view/error/500.vue")},
-            {path: "/buttonTest", name: "buttonTest", component: () => import("@/view/test/ButtonTest.vue")}
+            {path: "/buttonTest", name: "buttonTest", component: () => import("@/view/test/ButtonTest.vue")},
+            {path: "/TabsTest", name: "TabsTest", component: () => import("@/view/test/TabsTest.vue")},
+            {path: "/test/test1", name: "Test1", component: () => import("@/view/test/Test1.vue")},
+            {path: "/test/test2", name: "Test2", component: () => import("@/view/test/Test2.vue")},
+            {
+                path: "/tabs-test/tabsTest1",
+                name: "TabsTest1",
+                component: () => import("@/view/tabs-test/TabsTest1.vue")
+            },
+            {
+                path: "/tabs-test/tabsTest2",
+                name: "TabsTest2",
+                component: () => import("@/view/tabs-test/TabsTest2.vue")
+            },
+            {
+                path: "/tabs-test/tabsTest3",
+                name: "TabsTest3",
+                component: () => import("@/view/tabs-test/TabsTest3.vue")
+            },
+            {
+                path: "/tabs-test/tabsTest4",
+                name: "TabsTest4",
+                component: () => import("@/view/tabs-test/TabsTest4.vue")
+            },
+            {
+                path: "/tabs-test/tabsTest5",
+                name: "TabsTest5",
+                component: () => import("@/view/tabs-test/TabsTest5.vue")
+            },
         ],
         beforeEnter(to, form, next) {
             // 登入状态判断
