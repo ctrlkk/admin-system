@@ -5,5 +5,7 @@ export default {
     "关闭所有": "Close all",
     "关闭其他": "Close other",
     "通用后台管理系统": "admin-system",
-    "后台": "admin"
+    "后台": "admin",
+    "提交": "submit",
+    "图片裁剪": "Picture cropping",
 }
