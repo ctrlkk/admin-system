@@ -1,1 +1,0 @@
-import{an as e,Q as t,R as s,af as a,ai as o}from"./index-cc2a7994.js";const n={name:"403"},c={class:"home"},r=o("input",null,null,-1);function _(d,i,l,p,f,u){return t(),s("div",c,[a(" 403 "),r])}const h=e(n,[["render",_]]);export{h as default};

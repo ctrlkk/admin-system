@@ -1,1 +1,0 @@
-import{an as e,Q as t,R as a,af as n,ai as o}from"./index-cc2a7994.js";const s={name:"500"},c=o("input",null,null,-1);function r(_,l,p,d,i,u){return t(),a("div",null,[n(" 500 "),c])}const m=e(s,[["render",r]]);export{m as default};
