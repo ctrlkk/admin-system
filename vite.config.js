@@ -36,6 +36,9 @@ export default defineConfig({
             '@': fileURLToPath(new URL('./src', import.meta.url))
         }
     },
+    server: {
+        host: '0.0.0.0'
+    },
     define: {
         // 关闭vue-i18n的完整安装
         __VUE_I18N_FULL_INSTALL__: false,
