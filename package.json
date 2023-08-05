@@ -11,6 +11,7 @@
     "@element-plus/icons-vue": "^2.1.0",
     "@vueuse/core": "^9.1.0",
     "axios": "^1.4.0",
+    "cropperjs": "^1.5.13",
     "echarts": "^5.4.2",
     "element-plus": "^2.3.7",
     "lodash": "^4.17.21",
@@ -34,8 +35,8 @@
     "mockjs": "^1.1.0",
     "sass": "^1.63.6",
     "unplugin-auto-import": "^0.16.4",
-    "unplugin-vue-components": "^0.25.1",
     "unplugin-icons": "^0.16.3",
+    "unplugin-vue-components": "^0.25.1",
     "vite": "^4.3.9"
   }
 }

@@ -18,8 +18,9 @@ const routes = [
             {path: "/403", name: "403", component: () => import("@/view/error/403.vue")},
             {path: "/404", name: "404", component: () => import("@/view/error/404.vue")},
             {path: "/500", name: "500", component: () => import("@/view/error/500.vue")},
-            {path: "/buttonTest", name: "buttonTest", component: () => import("@/view/test/ButtonTest.vue")},
+            {path: "/ButtonTest", name: "ButtonTest", component: () => import("@/view/test/ButtonTest.vue")},
             {path: "/TabsTest", name: "TabsTest", component: () => import("@/view/test/TabsTest.vue")},
+            {path: "/UploadImage", name: "UploadImage", component: () => import("@/view/test/UploadImage.vue")},
             {path: "/test/test1", name: "Test1", component: () => import("@/view/test/Test1.vue")},
             {path: "/test/test2", name: "Test2", component: () => import("@/view/test/Test2.vue")},
             {

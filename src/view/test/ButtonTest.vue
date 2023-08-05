@@ -1,8 +1,3 @@
-<script>
-export default {
-  name: 'buttonTest'
-}
-</script>
 <script setup>
 import {ref} from "vue";
 import {useDark} from "@vueuse/core";

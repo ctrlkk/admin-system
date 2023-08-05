@@ -48,8 +48,9 @@ function getMenuData() {
             label: "组件测试",
             icon: "FullScreen",
             children: [
-                {label: "昼夜switch", path: "/buttonTest", name: "buttonTest", icon: "Open"},
-                {label: "标签页组件", path: "/TabsTest", name: "TabsTest", icon: "More"}
+                {label: "昼夜switch", path: "/ButtonTest", name: "ButtonTest", icon: "Open"},
+                {label: "标签页组件", path: "/TabsTest", name: "TabsTest", icon: "More"},
+                {label: "图片裁切组件", path: "/UploadImage", name: "UploadImage", icon: "UploadFilled"}
             ]
         },
         {
