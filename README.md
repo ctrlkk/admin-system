@@ -12,7 +12,7 @@
 具体使用方式在代码中有完善的注释
 
 ### 效果
-https://cxk-1233.github.io/admin-system/
+https://ctrlkk.github.io/admin-system/
 
 ### 关于昼夜切换开关（DayNightSwitch）
 ![img_1.png](https://github.com/Cxk-1233/admin-system/blob/master/img_1.png?raw=true)
